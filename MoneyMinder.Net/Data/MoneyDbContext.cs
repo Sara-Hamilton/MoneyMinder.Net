@@ -15,10 +15,10 @@ namespace MoneyMinder.Net.Data
 
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Fund> Funds { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Fund> Funds { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
