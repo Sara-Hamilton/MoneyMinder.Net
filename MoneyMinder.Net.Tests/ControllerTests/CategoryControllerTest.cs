@@ -144,5 +144,20 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.AreEqual(0, result);
         }
+
+        [TestMethod]
+        public void DB_EditUpdatesInDatabase_String()
+        {
+            // Arrange
+            Category testCategory = new Category { CategoryId = 1, Name = "Clothing" };
+            db.Save(testCategory);
+
+            //Act
+            testCategory.Name = "Edited Test Category";
+            db.Edit(testCategory);
+
+            //Assert
+            Assert.AreEqual("Edited Test Category2", testCategory.Name);
+        }
     }
 }
