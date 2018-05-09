@@ -15,7 +15,7 @@ namespace MoneyMinder.Net.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UsertController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MoneyDbContext db)
+        public UserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MoneyDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
