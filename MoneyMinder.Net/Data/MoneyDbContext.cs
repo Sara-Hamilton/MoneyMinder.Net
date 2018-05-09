@@ -10,7 +10,22 @@ namespace MoneyMinder.Net.Data
 {
     public class MoneyDbContext : IdentityDbContext<ApplicationUser>
     {
-        public MoneyDbContext(DbContextOptions options) : base(options)
+        public MoneyDbContext()
+        {
+
+        }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Fund> Funds { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseMySql(@"Server=localhost;Port=8889;database=money_minder_net;uid=root;pwd=root;");
+        }
+
+        public MoneyDbContext(DbContextOptions<MoneyDbContext> options) : base(options)
         {
 
         }
@@ -18,6 +33,9 @@ namespace MoneyMinder.Net.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<Fund>().ToTable("Funds");
+            builder.Entity<Transaction>().ToTable("Transactions");
             builder.Entity<ApplicationUser>(entity => {
                 entity.Property(m => m.Email).HasMaxLength(127);
                 entity.Property(m => m.NormalizedEmail).HasMaxLength(127);
@@ -29,9 +47,5 @@ namespace MoneyMinder.Net.Data
             });
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Fund> Funds { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
