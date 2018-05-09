@@ -74,5 +74,26 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             CollectionAssert.Contains(collection, testCategory);
         }
+
+        [TestMethod]
+        public void Mock_PostViewResultCreate_ViewResult()
+        {
+            // Arrange
+            Category testCategory = new Category
+            {
+                CategoryId = 1,
+                Name = "Clothing"
+            };
+
+            DbSetup();
+            CategoryController controller = new CategoryController(mock.Object);
+
+            // Act
+            var resultView = controller.Create(testCategory) as RedirectToActionResult;
+
+
+            // Assert
+            Assert.IsInstanceOfType(resultView, typeof(Category));
+        }
     }
 }
