@@ -43,7 +43,7 @@ namespace MoneyMinder.Net
             {
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 0;
+                options.Password.RequiredLength = 3;
                 options.Password.RequireDigit = false;
             });
         }
