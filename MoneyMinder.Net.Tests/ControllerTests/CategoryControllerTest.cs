@@ -133,5 +133,16 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             CollectionAssert.Contains(collection, testCategory);
         }
+
+        [TestMethod]
+        public void DB_DbStartsEmpty_0()
+        {
+            //Arrange
+            //Act
+            int result = db.Categories.ToList().Count;
+
+            //Assert
+            Assert.AreEqual(1, result);
+        }
     }
 }
