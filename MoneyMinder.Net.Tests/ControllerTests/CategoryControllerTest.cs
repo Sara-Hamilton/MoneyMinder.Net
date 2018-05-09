@@ -157,7 +157,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             db.Edit(testCategory);
 
             //Assert
-            Assert.AreEqual("Edited Test Category2", testCategory.Name);
+            Assert.AreEqual("Edited Test Category", testCategory.Name);
         }
     }
 }
