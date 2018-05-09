@@ -115,7 +115,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Assert
             Assert.IsInstanceOfType(resultView, typeof(ViewResult));
-            Assert.IsInstanceOfType(model, typeof(Fund));
+            Assert.IsInstanceOfType(model, typeof(Category));
         }
     }
 }
