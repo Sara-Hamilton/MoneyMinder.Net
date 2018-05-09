@@ -6,12 +6,15 @@ using Moq;
 using System.Linq;
 using System;
 using MoneyMinder.Net.Controllers;
-using MoneyMinder.Net.Controllers;
 using MoneyMinder.Net.Tests.Models;
 
 namespace MoneyMinder.Net.Tests.ControllerTests
 {
-    class CategoryControllerTest
+    [TestClass]
+    public class CategoryControllerTest : IDisposable
     {
+        Mock<ICategoryRepository> mock = new Mock<ICategoryRepository>();
+        EFCategoryRepository db = new EFCategoryRepository(new TestDbContext());
+
     }
 }
