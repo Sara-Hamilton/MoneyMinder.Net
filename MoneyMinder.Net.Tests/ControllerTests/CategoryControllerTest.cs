@@ -128,7 +128,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Act
             controller.Create(testCategory);
-            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Fund>;
+            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Category>;
 
             // Assert
             CollectionAssert.Contains(collection, testCategory);
