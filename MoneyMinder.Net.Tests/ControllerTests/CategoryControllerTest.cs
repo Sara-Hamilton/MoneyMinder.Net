@@ -175,5 +175,21 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.AreEqual(1, db.Categories.Count());
         }
+
+        [TestMethod]
+        public void DB_DeleteAllDeletesAllCategoriesFromDatabase_Void()
+        {
+            //Arrange
+            Category testCategory1 = new Category { CategoryId = 1, Name = "Clothing" };
+            Category testCategory2 = new Category { CategoryId = 2, Name = "Savings" };
+            db.Save(testCategory1);
+            db.Save(testCategory2);
+
+            //Act
+            db.DeleteAll();
+
+            //Assert
+            Assert.AreEqual(1, db.Categories.Count());
+        }
     }
 }
