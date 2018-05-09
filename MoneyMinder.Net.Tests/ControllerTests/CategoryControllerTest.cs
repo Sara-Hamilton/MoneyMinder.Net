@@ -54,7 +54,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             var result = indexView.ViewData.Model;
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(List<Fund>));
+            Assert.IsInstanceOfType(result, typeof(List<Category>));
         }
     }
 }
