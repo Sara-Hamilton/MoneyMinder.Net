@@ -23,7 +23,9 @@ namespace MoneyMinder.Net
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -65,6 +67,8 @@ namespace MoneyMinder.Net
 
             app.UseStaticFiles();
 
+            app.UseIdentity();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -77,5 +81,6 @@ namespace MoneyMinder.Net
                 await context.Response.WriteAsync("Hello World!");
             });
         }
+
     }
 }
