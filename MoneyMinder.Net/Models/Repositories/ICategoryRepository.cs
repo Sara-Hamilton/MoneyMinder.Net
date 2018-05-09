@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoneyMinder.Net.Models.Repositories
+namespace MoneyMinder.Net.Models
 {
-    public class ICategoryRepository
+    public interface ICategoryRepository
     {
         IQueryable<Category> Categories { get; }
         Category Save(Category category);
