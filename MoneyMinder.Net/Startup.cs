@@ -69,7 +69,7 @@ namespace MoneyMinder.Net
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=User}/{action=Index}/{id?}");
+                    template: "{controller=Account}/{action=Index}/{id?}");
             });
 
             app.Run(async (context) =>

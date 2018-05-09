@@ -10,17 +10,7 @@ namespace MoneyMinder.Net.Data
 {
     public class MoneyDbContext : IdentityDbContext<ApplicationUser>
     {
-        public MoneyDbContext()
-        {
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseMySql(@"Server=localhost;Port=8889;database=money_minder_net;uid=root;pwd=root;");
-        }
-
-        public MoneyDbContext(DbContextOptions<MoneyDbContext> options) : base(options)
+        public MoneyDbContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -38,5 +28,7 @@ namespace MoneyMinder.Net.Data
                 entity.Property(m => m.Name).HasMaxLength(127); entity.Property(m => m.NormalizedName).HasMaxLength(127);
             });
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
