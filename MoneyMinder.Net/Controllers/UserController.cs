@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using MoneyMinder.Net.Models;
 using MoneyMinder.Net.Data;
+using MoneyMinder.Net.ViewModels;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -25,6 +26,26 @@ namespace MoneyMinder.Net.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            var user = new ApplicationUser { UserName = model.Email };
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
