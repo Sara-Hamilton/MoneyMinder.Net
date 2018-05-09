@@ -21,15 +21,15 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             db.DeleteAll();
         }
 
-        //private void DbSetup()
-        //{
-        //    mock.Setup(m => m.Categories).Returns(new Category[]
-        //    {
-        //        new Category { CategoryId = 1, Name = "Clothing" },
-        //        new Category { CategoryId = 2, Name = "Savings" },
-        //        new Category { CategoryId = 3, Name = "Vacation" }
-        //    }.AsQueryable());
-        //}
+        private void DbSetup()
+        {
+            mock.Setup(m => m.Categories).Returns(new Category[]
+            {
+                new Category { CategoryId = 1, Name = "Clothing" },
+                new Category { CategoryId = 2, Name = "Savings" },
+                new Category { CategoryId = 3, Name = "Vacation" }
+            }.AsQueryable());
+        }
 
         [TestMethod]
         public void Mock_GetViewResultIndex_ActionResult()
@@ -61,14 +61,15 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         public void Mock_IndexModelContainsCategories_Collection()
         {
             // Arrange
+            DbSetup();
             CategoryController controller = new CategoryController(mock.Object);
             Category testCategory = new Category();
-            testCategory.Name = "Giant Gummi";
+            testCategory.Name = "Clothing";
             testCategory.CategoryId = 1;
 
             // Act
             ViewResult indexView = controller.Index() as ViewResult;
-            List<Fund> collection = indexView.ViewData.Model as List<Fund>;
+            List<Category> collection = indexView.ViewData.Model as List<Category>;
 
             // Assert
             CollectionAssert.Contains(collection, testCategory);
