@@ -35,7 +35,6 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         public void Mock_GetViewResultIndex_ActionResult()
         {
             //Arrange
-            //DbSetup();
             CategoryController controller = new CategoryController(mock.Object);
 
             //Act
@@ -43,6 +42,19 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        [TestMethod]
+        public void Mock_IndexContainsModelData_List()
+        {
+            // Arrange
+            ViewResult indexView = new CategoryController(mock.Object).Index() as ViewResult;
+
+            // Act
+            var result = indexView.ViewData.Model;
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(List<Fund>));
         }
     }
 }
