@@ -56,5 +56,22 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             Assert.IsInstanceOfType(result, typeof(List<Category>));
         }
+
+        [TestMethod]
+        public void Mock_IndexModelContainsCategories_Collection()
+        {
+            // Arrange
+            CategoryController controller = new CategoryController(mock.Object);
+            Category testCategory = new Category();
+            testCategory.Name = "Giant Gummi";
+            testCategory.CategoryId = 1;
+
+            // Act
+            ViewResult indexView = controller.Index() as ViewResult;
+            List<Fund> collection = indexView.ViewData.Model as List<Fund>;
+
+            // Assert
+            CollectionAssert.Contains(collection, testCategory);
+        }
     }
 }
