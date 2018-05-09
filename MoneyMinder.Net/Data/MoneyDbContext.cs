@@ -29,6 +29,9 @@ namespace MoneyMinder.Net.Data
             });
         }
 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Fund> Funds { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
