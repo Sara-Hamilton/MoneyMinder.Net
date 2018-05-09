@@ -84,7 +84,6 @@ namespace MoneyMinder.Net.Controllers
         [HttpPost, ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed(int id)
         {
-            var categorys = categoryRepo.Categories;
             categoryRepo.DeleteAll();
             return RedirectToAction("Index");
         }
