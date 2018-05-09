@@ -16,7 +16,7 @@ namespace MoneyMinder.Net.Tests
             category1.CategoryId = 1;
 
             var category2 = new Category();
-            category2.CategoryId = 2;
+            category2.CategoryId = 1;
 
             //Act
 
@@ -34,7 +34,7 @@ namespace MoneyMinder.Net.Tests
             //Act
 
             //Assert
-            Assert.IsInstanceOfType(category, typeof(Transaction));
+            Assert.IsInstanceOfType(category, typeof(Category));
         }
     }
 }
