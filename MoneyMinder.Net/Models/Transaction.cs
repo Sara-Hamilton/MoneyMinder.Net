@@ -14,10 +14,13 @@ namespace MoneyMinder.Net.Models
         public int TransactionId { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
+        [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? Amount { get; set; }
+        [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? PreviousTotal { get; set; }
 

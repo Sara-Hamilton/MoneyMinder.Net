@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MoneyMinder.Net.Models.Category>
+
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Categories</h2>
+<hr />
+
+@if (Model.Any())
+{
+    @foreach (var listCategory in Model)
+    {
+        @Html.DisplayFor(modelProduct => listCategory.Name)<br />
+    }
+}
+else
+{
+    <p>No categories have been added yet!</p>
+}
+
+<hr />
+
+<br />
+
+@Html.ActionLink("Create new category", "Create")
