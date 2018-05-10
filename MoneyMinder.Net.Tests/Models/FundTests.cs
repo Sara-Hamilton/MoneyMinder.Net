@@ -10,7 +10,7 @@ namespace MoneyMinder.Net.Tests
     public class FundTests
     {
         [TestMethod]
-        public void Equals_FundsWithSameIdAreEqual_True()
+        public void FundEquals_FundsWithSameIdAreEqual_True()
         {
             //Arrange 
             var fund1 = new Fund();
@@ -27,7 +27,7 @@ namespace MoneyMinder.Net.Tests
         }
 
         [TestMethod]
-        public void Constructor_CreatesAFundObject_True()
+        public void FundConstructor_CreatesAFundObject_True()
         {
             //Arrange
             var fund = new Fund();
