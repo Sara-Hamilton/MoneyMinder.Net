@@ -25,5 +25,17 @@ namespace MoneyMinder.Net.Tests.Models
             //Assert
             Assert.AreEqual(transaction1, transaction2);
         }
+
+        [TestMethod]
+        public void TransactionConstructor_CreatesATransactionObject_True()
+        {
+            //Arrange
+            var transaction = new Transaction();
+
+            //Act
+
+            //Assert
+            Assert.IsInstanceOfType(transaction, typeof(Category));
+        }
     }
 }
