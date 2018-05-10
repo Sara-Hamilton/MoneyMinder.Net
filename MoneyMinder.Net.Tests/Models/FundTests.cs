@@ -35,7 +35,7 @@ namespace MoneyMinder.Net.Tests
             //Act
 
             //Assert
-            Assert.IsInstanceOfType(fund, typeof(Category));
+            Assert.IsInstanceOfType(fund, typeof(Fund));
         }
     }
 }
