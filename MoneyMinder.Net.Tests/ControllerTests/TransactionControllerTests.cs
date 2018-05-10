@@ -44,13 +44,15 @@ namespace MoneyMinder.Net.Tests.ControllerTests
                 new Fund { FundId = 2, Name = "Escrow" },
                 new Fund { FundId = 3, Name = "Savings" },
             }.AsQueryable());
-        }
+
 
             //var testDate = new DateTime(2018, 03, 01);
             //transactionMock.Setup(m => m.Transactions).Returns(new Transaction[]
             //{
             //    new Transaction { TransactionId = 1, Description = "Paycheck", Type = "Deposit", Date = testDate, Amount = 523.72m, CategoryId = 1, FundId = 1}
             //}).AsQueryable());
+
+        }
 
         [TestMethod]
         public void TransactionMock_GetViewResultIndex_ActionResult()
@@ -123,6 +125,47 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Assert
             Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
+        }
+
+        //[TestMethod]
+        //public void TransactionMock_GetDetails_ReturnsView()
+        //{
+        //    // Arrange
+        //    Transaction testTransaction = new Transaction();
+        //    testTransaction.Description = "Paycheck";
+        //    testTransaction.FundId = 1;
+        //    testTransaction.Type = "Deposit";
+        //    testTransaction.Date = new DateTime(2018, 03, 01);
+        //    testTransaction.Amount = 523.72m;
+        //    testTransaction.CategoryId = 1;
+        //    testTransaction.FundId = 1;
+
+        //    DbSetup();
+        //    TransactionController controller = new TransactionController(transactionMock.Object);
+
+        //    // Act
+        //    var resultView = controller.Details(testTransaction.TransactionId) as ViewResult;
+        //    var model = resultView.ViewData.Model as Transaction;
+
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+        //    Assert.IsInstanceOfType(model, typeof(Transaction));
+        //}
+
+        [TestMethod]
+        public void TransactionDB_CreatesNewEntries_Collection()
+        {
+            // Arrange
+            TransactionController controller = new TransactionController(transactionDb);
+            Transaction testTransaction = new Transaction();
+            testTransaction.Description = "TestDb Transaction";
+
+            // Act
+            controller.Create(testTransaction);
+            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Fund>;
+
+            // Assert
+            CollectionAssert.Contains(collection, testTransaction);
         }
 
     }

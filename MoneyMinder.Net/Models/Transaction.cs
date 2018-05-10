@@ -37,6 +37,7 @@ namespace MoneyMinder.Net.Models
             Amount = amount;
             CategoryId = categoryId;
             FundId = fundId;
+            TransactionId = id;
         }
 
         public override bool Equals(System.Object otherTransaction)
