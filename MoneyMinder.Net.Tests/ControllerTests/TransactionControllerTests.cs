@@ -182,7 +182,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             int result = transactionDb.Transactions.ToList().Count;
 
             //Assert
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(0, result);
         }
 
     }
