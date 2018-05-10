@@ -173,7 +173,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             db.Remove(testFund1);
 
             //Assert
-            Assert.AreEqual(0, db.Funds.Count());
+            Assert.AreEqual(1, db.Funds.Count());
         }
     }
 }
