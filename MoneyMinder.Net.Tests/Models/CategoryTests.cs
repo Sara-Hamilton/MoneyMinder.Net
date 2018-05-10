@@ -9,7 +9,7 @@ namespace MoneyMinder.Net.Tests
     public class CategoryTests
     {
         [TestMethod]
-        public void Equals_ProductsWithSameIdAreEqual_True()
+        public void Equals_CategoriesWithSameIdAreEqual_True()
         {
             //Arrange 
             var category1 = new Category();
