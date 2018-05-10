@@ -23,14 +23,15 @@
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Date)</td>
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Type)</td>
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Description)</td>
-            <td>@Html.DisplayFor(modelTransaction => listTransaction.Fund)</td>
-            <td>@Html.DisplayFor(modelTransaction => listTransaction.Category)</td>
-            <td>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Fund.Name)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Category.Name)</td>
+            <td><span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
         </tr>
     </table>
-        
-
-
 }
+
+    <p>
+        @Html.ActionLink("Create New Transaction", "Create", "Transaction")
+    </p>
 
 

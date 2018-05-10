@@ -1,0 +1,35 @@
+﻿@model MoneyMinder.Net.Models.Transaction
+
+@{
+    ViewData["Title"] = "Transaction - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a new Transaction</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Date)<br />
+    @Html.EditorFor(model => model.Date)<br />
+
+    @Html.LabelFor(model => model.Type)<br />
+    @Html.DropDownListFor(model => model.Type, new SelectList(new[]{"Deposit",
+"Withdrawl"}))<br />
+
+    @Html.LabelFor(model => model.Description)<br />
+    @Html.EditorFor(model => model.Description)<br />
+
+    @Html.LabelFor(model => model.FundId)<br />
+    @Html.DropDownList("FundId")<br />
+
+    @Html.LabelFor(model => model.CategoryId)<br />
+    @Html.DropDownList("CategoryId")<br />
+
+    @Html.LabelFor(model => model.Amount)<br />
+    <span>$</span>@Html.EditorFor(model => model.Amount)<br />
+
+    <input type="submit" value="Create" class="btn btn-default" />
+}
+
+@Html.ActionLink("Back to Transactions", "Index")
