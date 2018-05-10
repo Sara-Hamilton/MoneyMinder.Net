@@ -111,7 +111,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Act
             var resultView = controller.Details(testFund.FundId) as ViewResult;
-            var model = resultView.ViewData.Model as Category;
+            var model = resultView.ViewData.Model as Fund;
 
             // Assert
             Assert.IsInstanceOfType(resultView, typeof(ViewResult));
