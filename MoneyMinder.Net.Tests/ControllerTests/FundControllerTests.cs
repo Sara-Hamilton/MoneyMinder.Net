@@ -93,7 +93,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
 
             // Assert
-            Assert.IsInstanceOfType(resultView, typeof(ContentResult));
+            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
         }
     }
 }
