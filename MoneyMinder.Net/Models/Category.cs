@@ -13,8 +13,6 @@ namespace MoneyMinder.Net.Models
         [Key]
         public int CategoryId { get; set; }
         public string Name { get; set; }
-        [ForeignKey("UserId")]
-        public string UserId { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ApplicationUser User { get; set; }

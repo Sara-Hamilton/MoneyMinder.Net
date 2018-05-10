@@ -66,11 +66,11 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Details(int id)
-        {
-            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            return View(thisCategory);
-        }
+        //public IActionResult Details(int id)
+        //{
+        //    var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+        //    return View(thisCategory);
+        //}
 
         public IActionResult Edit(int id)
         {
