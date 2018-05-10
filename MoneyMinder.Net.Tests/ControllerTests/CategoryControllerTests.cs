@@ -11,7 +11,7 @@ using MoneyMinder.Net.Tests.Models;
 namespace MoneyMinder.Net.Tests.ControllerTests
 {
     [TestClass]
-    public class CategoryControllerTest : IDisposable
+    public class CategoryControllerTests : IDisposable
     {
         Mock<ICategoryRepository> mock = new Mock<ICategoryRepository>();
         EFCategoryRepository db = new EFCategoryRepository(new TestDbContext());
