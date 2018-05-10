@@ -4,24 +4,31 @@
     ViewData["Title"] = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Categories</h2>
-<hr />
 
-@if (Model.Any())
-{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
     @foreach (var listCategory in Model)
     {
-        @Html.DisplayFor(modelProduct => listCategory.Name)<br />
+        <tr>
+            <td>
+                @Html.DisplayFor(modelCategory => listCategory.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = listCategory.CategoryId }) |
+                @Html.ActionLink("Details", "Details", new { id = listCategory.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = listCategory.CategoryId })
+            </td>
+        </tr>
     }
-}
-else
-{
-    <p>No categories have been added yet!</p>
-}
+</table>
 
-<hr />
-
-<br />
-
-@Html.ActionLink("Create new category", "Create")
+<p>
+    @Html.ActionLink("Create New Category", "Create", "Categories")
+</p>
