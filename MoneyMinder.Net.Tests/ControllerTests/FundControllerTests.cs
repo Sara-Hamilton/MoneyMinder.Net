@@ -44,95 +44,95 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
 
-        [TestMethod]
-        public void FundMock_IndexContainsModelData_List()
-        {
-            // Arrange
-            ViewResult indexView = new FundController(mock.Object).Index() as ViewResult;
+        //[TestMethod]
+        //public void FundMock_IndexContainsModelData_List()
+        //{
+        //    // Arrange
+        //    ViewResult indexView = new FundController(mock.Object).Index() as ViewResult;
 
-            // Act
-            var result = indexView.ViewData.Model;
+        //    // Act
+        //    var result = indexView.ViewData.Model;
 
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(List<Fund>));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(result, typeof(List<Fund>));
+        //}
 
-        [TestMethod]
-        public void FundMock_IndexModelContainsFunds_Collection()
-        {
-            // Arrange
-            DbSetup();
-            FundController controller = new FundController(mock.Object);
-            Fund testFund = new Fund();
-            testFund.Name = "House Account";
-            testFund.FundId = 1;
+        //[TestMethod]
+        //public void FundMock_IndexModelContainsFunds_Collection()
+        //{
+        //    // Arrange
+        //    DbSetup();
+        //    FundController controller = new FundController(mock.Object);
+        //    Fund testFund = new Fund();
+        //    testFund.Name = "House Account";
+        //    testFund.FundId = 1;
 
-            // Act
-            ViewResult indexView = controller.Index() as ViewResult;
-            List<Fund> collection = indexView.ViewData.Model as List<Fund>;
+        //    // Act
+        //    ViewResult indexView = controller.Index() as ViewResult;
+        //    List<Fund> collection = indexView.ViewData.Model as List<Fund>;
 
-            // Assert
-            CollectionAssert.Contains(collection, testFund);
-        }
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testFund);
+        //}
 
-        [TestMethod]
-        public void FundMock_PostViewResultCreate_ViewResult()
-        {
-            // Arrange
-            Fund testFund = new Fund
-            {
-                FundId = 1,
-                Name = "House Account"
-            };
+        //[TestMethod]
+        //public void FundMock_PostViewResultCreate_ViewResult()
+        //{
+        //    // Arrange
+        //    Fund testFund = new Fund
+        //    {
+        //        FundId = 1,
+        //        Name = "House Account"
+        //    };
 
-            DbSetup();
-            FundController controller = new FundController(mock.Object);
+        //    DbSetup();
+        //    FundController controller = new FundController(mock.Object);
 
-            // Act
-            var resultView = controller.Create(testFund) as RedirectToActionResult;
+        //    // Act
+        //    var resultView = controller.Create(testFund) as RedirectToActionResult;
 
 
-            // Assert
-            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
+        //}
 
-        [TestMethod]
-        public void FundMock_GetDetails_ReturnsView()
-        {
-            // Arrange
-            Fund testFund = new Fund
-            {
-                FundId = 1,
-                Name = "House Account"
-            };
+        //[TestMethod]
+        //public void FundMock_GetDetails_ReturnsView()
+        //{
+        //    // Arrange
+        //    Fund testFund = new Fund
+        //    {
+        //        FundId = 1,
+        //        Name = "House Account"
+        //    };
 
-            DbSetup();
-            FundController controller = new FundController(mock.Object);
+        //    DbSetup();
+        //    FundController controller = new FundController(mock.Object);
 
-            // Act
-            var resultView = controller.Details(testFund.FundId) as ViewResult;
-            var model = resultView.ViewData.Model as Fund;
+        //    // Act
+        //    var resultView = controller.Details(testFund.FundId) as ViewResult;
+        //    var model = resultView.ViewData.Model as Fund;
 
-            // Assert
-            Assert.IsInstanceOfType(resultView, typeof(ViewResult));
-            Assert.IsInstanceOfType(model, typeof(Fund));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+        //    Assert.IsInstanceOfType(model, typeof(Fund));
+        //}
 
-        [TestMethod]
-        public void FundDB_CreatesNewEntries_Collection()
-        {
-            // Arrange
-            FundController controller = new FundController(db);
-            Fund testFund = new Fund();
-            testFund.Name = "TestDb Fund";
+        //[TestMethod]
+        //public void FundDB_CreatesNewEntries_Collection()
+        //{
+        //    // Arrange
+        //    FundController controller = new FundController(db);
+        //    Fund testFund = new Fund();
+        //    testFund.Name = "TestDb Fund";
 
-            // Act
-            controller.Create(testFund);
-            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Fund>;
+        //    // Act
+        //    controller.Create(testFund);
+        //    var collection = (controller.Index() as ViewResult).ViewData.Model as List<Fund>;
 
-            // Assert
-            CollectionAssert.Contains(collection, testFund);
-        }
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testFund);
+        //}
 
         [TestMethod]
         public void FundDB_DbStartsEmpty_0()

@@ -9,7 +9,7 @@ namespace MoneyMinder.Net.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Email]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

@@ -19,11 +19,17 @@ namespace MoneyMinder.Net.Controllers
         //private IFundRepository fundRepo;
         private readonly MoneyDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
+        private IFundRepository @object;
 
         public FundController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
         {
             _userManager = userManager;
             _db = db;
+        }
+
+        public FundController(IFundRepository @object)
+        {
+            this.@object = @object;
         }
 
         //public FundController(IFundRepository repo = null)

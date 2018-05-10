@@ -44,95 +44,95 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
 
-        [TestMethod]
-        public void CategoryMock_IndexContainsModelData_List()
-        {
-            // Arrange
-            ViewResult indexView = new CategoryController(mock.Object).Index() as ViewResult;
+        //[TestMethod]
+        //public void CategoryMock_IndexContainsModelData_List()
+        //{
+        //    // Arrange
+        //    ViewResult indexView = new CategoryController(mock.Object).Index() as ViewResult;
 
-            // Act
-            var result = indexView.ViewData.Model;
+        //    // Act
+        //    var result = indexView.ViewData.Model;
 
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(List<Category>));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(result, typeof(List<Category>));
+        //}
 
-        [TestMethod]
-        public void CategoryMock_IndexModelContainsCategories_Collection()
-        {
-            // Arrange
-            DbSetup();
-            CategoryController controller = new CategoryController(mock.Object);
-            Category testCategory = new Category();
-            testCategory.Name = "Clothing";
-            testCategory.CategoryId = 1;
+        //[TestMethod]
+        //public void CategoryMock_IndexModelContainsCategories_Collection()
+        //{
+        //    // Arrange
+        //    DbSetup();
+        //    CategoryController controller = new CategoryController(mock.Object);
+        //    Category testCategory = new Category();
+        //    testCategory.Name = "Clothing";
+        //    testCategory.CategoryId = 1;
 
-            // Act
-            ViewResult indexView = controller.Index() as ViewResult;
-            List<Category> collection = indexView.ViewData.Model as List<Category>;
+        //    // Act
+        //    ViewResult indexView = controller.Index() as ViewResult;
+        //    List<Category> collection = indexView.ViewData.Model as List<Category>;
 
-            // Assert
-            CollectionAssert.Contains(collection, testCategory);
-        }
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testCategory);
+        //}
 
-        [TestMethod]
-        public void CategoryMock_PostViewResultCreate_ViewResult()
-        {
-            // Arrange
-            Category testCategory = new Category
-            {
-                CategoryId = 1,
-                Name = "Clothing"
-            };
+        //[TestMethod]
+        //public void CategoryMock_PostViewResultCreate_ViewResult()
+        //{
+        //    // Arrange
+        //    Category testCategory = new Category
+        //    {
+        //        CategoryId = 1,
+        //        Name = "Clothing"
+        //    };
 
-            DbSetup();
-            CategoryController controller = new CategoryController(mock.Object);
+        //    DbSetup();
+        //    CategoryController controller = new CategoryController(mock.Object);
 
-            // Act
-            var resultView = controller.Create(testCategory) as RedirectToActionResult;
+        //    // Act
+        //    var resultView = controller.Create(testCategory) as RedirectToActionResult;
 
 
-            // Assert
-            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
+        //}
 
-        [TestMethod]
-        public void CategoryMock_GetDetails_ReturnsView()
-        {
-            // Arrange
-            Category testCategory = new Category
-            {
-                CategoryId = 1,
-                Name = "Clothing"
-            };
+        //[TestMethod]
+        //public void CategoryMock_GetDetails_ReturnsView()
+        //{
+        //    // Arrange
+        //    Category testCategory = new Category
+        //    {
+        //        CategoryId = 1,
+        //        Name = "Clothing"
+        //    };
 
-            DbSetup();
-            CategoryController controller = new CategoryController(mock.Object);
+        //    DbSetup();
+        //    CategoryController controller = new CategoryController(mock.Object);
 
-            // Act
-            var resultView = controller.Details(testCategory.CategoryId) as ViewResult;
-            var model = resultView.ViewData.Model as Category;
+        //    // Act
+        //    var resultView = controller.Details(testCategory.CategoryId) as ViewResult;
+        //    var model = resultView.ViewData.Model as Category;
 
-            // Assert
-            Assert.IsInstanceOfType(resultView, typeof(ViewResult));
-            Assert.IsInstanceOfType(model, typeof(Category));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+        //    Assert.IsInstanceOfType(model, typeof(Category));
+        //}
 
-        [TestMethod]
-        public void CategoryDB_CreatesNewEntries_Collection()
-        {
-            // Arrange
-            CategoryController controller = new CategoryController(db);
-            Category testCategory = new Category();
-            testCategory.Name = "TestDb Category";
+        //[TestMethod]
+        //public void CategoryDB_CreatesNewEntries_Collection()
+        //{
+        //    // Arrange
+        //    CategoryController controller = new CategoryController(db);
+        //    Category testCategory = new Category();
+        //    testCategory.Name = "TestDb Category";
 
-            // Act
-            controller.Create(testCategory);
-            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Category>;
+        //    // Act
+        //    controller.Create(testCategory);
+        //    var collection = (controller.Index() as ViewResult).ViewData.Model as List<Category>;
 
-            // Assert
-            CollectionAssert.Contains(collection, testCategory);
-        }
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testCategory);
+        //}
 
         [TestMethod]
         public void CategoryDB_DbStartsEmpty_0()

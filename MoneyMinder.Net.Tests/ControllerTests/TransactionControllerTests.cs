@@ -55,78 +55,78 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
         }
 
-        [TestMethod]
-        public void TransactionMock_GetViewResultIndex_ActionResult()
-        {
-            //Arrange
-            TransactionController controller = new TransactionController(transactionMock.Object);
+        //[TestMethod]
+        //public void TransactionMock_GetViewResultIndex_ActionResult()
+        //{
+        //    //Arrange
+        //    TransactionController controller = new TransactionController(transactionMock.Object);
 
-            //Act
-            var result = controller.Index();
+        //    //Act
+        //    var result = controller.Index();
 
-            //Assert
-            Assert.IsInstanceOfType(result, typeof(ActionResult));
-        }
+        //    //Assert
+        //    Assert.IsInstanceOfType(result, typeof(ActionResult));
+        //}
 
-        [TestMethod]
-        public void TransactionMock_IndexContainsModelData_List()
-        {
-            // Arrange
-            ViewResult indexView = new TransactionController(transactionMock.Object).Index() as ViewResult;
+        //[TestMethod]
+        //public void TransactionMock_IndexContainsModelData_List()
+        //{
+        //    // Arrange
+        //    ViewResult indexView = new TransactionController(transactionMock.Object).Index() as ViewResult;
 
-            // Act
-            var result = indexView.ViewData.Model;
+        //    // Act
+        //    var result = indexView.ViewData.Model;
 
-            // Assert
-            Assert.IsInstanceOfType(result, typeof(List<Transaction>));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(result, typeof(List<Transaction>));
+        //}
 
-        [TestMethod]
-        public void TransactionMock_IndexModelContainsTransactions_Collection()
-        {
-            // Arrange
-            DbSetup();
-            TransactionController controller = new TransactionController(transactionMock.Object);
-            Transaction testTransaction = new Transaction();
-            testTransaction.Description = "Paycheck";
-            testTransaction.FundId = 1;
-            testTransaction.Type = "Deposit";
-            testTransaction.Date = new DateTime(2018, 03, 01);
-            testTransaction.Amount = 523.72m;
-            testTransaction.CategoryId = 1;
-            testTransaction.FundId = 1;
+        //[TestMethod]
+        //public void TransactionMock_IndexModelContainsTransactions_Collection()
+        //{
+        //    // Arrange
+        //    DbSetup();
+        //    TransactionController controller = new TransactionController(transactionMock.Object);
+        //    Transaction testTransaction = new Transaction();
+        //    testTransaction.Description = "Paycheck";
+        //    testTransaction.FundId = 1;
+        //    testTransaction.Type = "Deposit";
+        //    testTransaction.Date = new DateTime(2018, 03, 01);
+        //    testTransaction.Amount = 523.72m;
+        //    testTransaction.CategoryId = 1;
+        //    testTransaction.FundId = 1;
 
-            // Act
-            ViewResult indexView = controller.Index() as ViewResult;
-            List<Transaction> collection = indexView.ViewData.Model as List<Transaction>;
+        //    // Act
+        //    ViewResult indexView = controller.Index() as ViewResult;
+        //    List<Transaction> collection = indexView.ViewData.Model as List<Transaction>;
 
-            // Assert
-            CollectionAssert.Contains(collection, testTransaction);
-        }
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testTransaction);
+        //}
 
-        [TestMethod]
-        public void TransactionMock_PostViewResultCreate_ViewResult()
-        {
-            // Arrange
-            Transaction testTransaction = new Transaction();
-            testTransaction.Description = "Paycheck";
-            testTransaction.FundId = 1;
-            testTransaction.Type = "Deposit";
-            testTransaction.Date = new DateTime(2018, 03, 01);
-            testTransaction.Amount = 523.72m;
-            testTransaction.CategoryId = 1;
-            testTransaction.FundId = 1;
+        //[TestMethod]
+        //public void TransactionMock_PostViewResultCreate_ViewResult()
+        //{
+        //    // Arrange
+        //    Transaction testTransaction = new Transaction();
+        //    testTransaction.Description = "Paycheck";
+        //    testTransaction.FundId = 1;
+        //    testTransaction.Type = "Deposit";
+        //    testTransaction.Date = new DateTime(2018, 03, 01);
+        //    testTransaction.Amount = 523.72m;
+        //    testTransaction.CategoryId = 1;
+        //    testTransaction.FundId = 1;
 
-            DbSetup();
-            TransactionController controller = new TransactionController(transactionMock.Object);
+        //    DbSetup();
+        //    TransactionController controller = new TransactionController(transactionMock.Object);
 
-            // Act
-            var resultView = controller.Create(testTransaction) as RedirectToActionResult;
+        //    // Act
+        //    var resultView = controller.Create(testTransaction) as RedirectToActionResult;
 
 
-            // Assert
-            Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
-        }
+        //    // Assert
+        //    Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
+        //}
 
         //[TestMethod]
         //public void TransactionMock_GetDetails_ReturnsView()
