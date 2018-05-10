@@ -17,7 +17,7 @@ namespace MoneyMinder.Net.Tests
             fund1.FundId = 1;
 
             var fund2 = new Fund();
-            fund2.FundId = 2;
+            fund2.FundId = 1;
 
             //Act
 
