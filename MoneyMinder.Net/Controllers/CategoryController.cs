@@ -90,27 +90,36 @@ namespace MoneyMinder.Net.Controllers
 
         public ActionResult Delete(int id)
         {
-            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            categoryRepo.Remove(thisCategory);
+            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            //categoryRepo.Remove(thisCategory);
+
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            _db.Categories.Remove(thisCategory);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult DeleteAll(int id)
         {
-            return View(categoryRepo.Categories.ToList());
+            //return View(categoryRepo.Categories.ToList());
+            return View(_db.Categories.ToList());
         }
 
         [HttpPost, ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed(int id)
         {
-            categoryRepo.DeleteAll();
+            //categoryRepo.DeleteAll();
+            _db.Categories.RemoveRange(_db.Categories);
+            _db.SaveChanges();
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
