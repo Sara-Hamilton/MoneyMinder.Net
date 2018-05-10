@@ -152,20 +152,37 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         //    Assert.IsInstanceOfType(model, typeof(Transaction));
         //}
 
+        //[TestMethod]
+        //public void TransactionDB_CreatesNewEntries_Collection()
+        //{
+        //    // Arrange
+        //    CategoryController categoryController = new CategoryController(catDb);
+        //    FundController fundController = new FundController(fundDb);
+        //    TransactionController transactionController = new TransactionController(transactionDb);
+        //    Category testCategory = new Category { CategoryId = 1, Name = "Income" };
+        //    Fund testFund = new Fund { FundId = 1, Name = "General" };
+        //    Transaction testTransaction = new Transaction();
+        //    testTransaction.Description = "TestDb Transaction";
+        //    testTransaction.CategoryId = 1;
+        //    testTransaction.FundId = 1;
+
+        //    // Act
+        //    transactionController.Create(testTransaction);
+        //    var collection = (transactionController.Index() as ViewResult).ViewData.Model as List<Transaction>;
+
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testTransaction);
+        //}
+
         [TestMethod]
-        public void TransactionDB_CreatesNewEntries_Collection()
+        public void TransactionDB_DbStartsEmpty_0()
         {
-            // Arrange
-            TransactionController controller = new TransactionController(transactionDb);
-            Transaction testTransaction = new Transaction();
-            testTransaction.Description = "TestDb Transaction";
+            //Arrange
+            //Act
+            int result = transactionDb.Transactions.ToList().Count;
 
-            // Act
-            controller.Create(testTransaction);
-            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Fund>;
-
-            // Assert
-            CollectionAssert.Contains(collection, testTransaction);
+            //Assert
+            Assert.AreEqual(1, result);
         }
 
     }
