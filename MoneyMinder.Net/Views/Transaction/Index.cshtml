@@ -8,17 +8,17 @@
 <h2>Transactions</h2>
 
 
+    <table class="table table-striped table-bordered">
+    <tr>
+        <th class="col-md-1">Date</th>
+        <th class="col-md-1">Type</th>
+        <th class="col-md-4">Description</th>
+        <th class="col-md-2">Fund</th>
+        <th class="col-md-2">Category</th>
+        <th class="col-md-2">Transaction Amount</th>
+    </tr>
 @foreach (var listTransaction in Model)
 {
-    <table class="table table-striped table-bordered">
-        <tr>
-            <th class="col-md-1">Date</th>
-            <th class="col-md-1">Type</th>
-            <th class="col-md-4">Description</th>
-            <th class="col-md-2">Fund</th>
-            <th class="col-md-2">Category</th>
-            <th class="col-md-2">Transaction Amount</th>
-        </tr>
         <tr class="list-group">
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Date)</td>
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Type)</td>
@@ -27,8 +27,9 @@
             <td>@Html.DisplayFor(modelTransaction => listTransaction.Category.Name)</td>
             <td><span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
         </tr>
-    </table>
 }
+    </table>
+
 
     <p>
         @Html.ActionLink("Create New Transaction", "Create", "Transaction")
