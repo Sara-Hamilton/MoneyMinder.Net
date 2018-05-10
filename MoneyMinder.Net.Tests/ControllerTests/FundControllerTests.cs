@@ -144,5 +144,20 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.AreEqual(0, result);
         }
+
+        [TestMethod]
+        public void FundDB_EditUpdatesInDatabase_String()
+        {
+            // Arrange
+            Fund testFund = new Fund { FundId = 1, Name = "House Account" };
+            db.Save(testFund);
+
+            //Act
+            testFund.Name = "Edited Test Fund";
+            db.Edit(testFund);
+
+            //Assert
+            Assert.AreEqual("Edited Test Fund!", testFund.Name);
+        }
     }
 }
