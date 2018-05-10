@@ -8,9 +8,10 @@ using MoneyMinder.Net.Data;
 namespace MoneyMinder.Net.Migrations
 {
     [DbContext(typeof(MoneyDbContext))]
-    partial class MoneyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180510221317_AddUserTotalToUserModel")]
+    partial class AddUserTotalToUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
