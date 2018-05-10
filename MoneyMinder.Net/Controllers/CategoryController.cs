@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoneyMinder.Net.Models;
 using MoneyMinder.Net.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -14,6 +17,14 @@ namespace MoneyMinder.Net.Controllers
     public class CategoryController : Controller
     {
         private ICategoryRepository categoryRepo;
+        //private readonly MoneyDbContext _db;
+        //private readonly UserManager<ApplicationUser> _userManager;
+
+        //public CategoryController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
+        //{
+        //    _userManager = userManager;
+        //    _db = db;
+        //}
 
         public CategoryController(ICategoryRepository repo = null)
         {
@@ -27,8 +38,11 @@ namespace MoneyMinder.Net.Controllers
             }
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //var currentUser = await _userManager.FindByIdAsync(userId);
+            //return View(categoryRepo.Categories.Where(x => x.User.Id == currentUser.Id).ToList());
             return View(categoryRepo.Categories.ToList());
         }
 
