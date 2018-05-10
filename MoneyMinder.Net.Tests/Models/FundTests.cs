@@ -25,5 +25,17 @@ namespace MoneyMinder.Net.Tests
             //Assert
             Assert.AreEqual(fund1, fund2);
         }
+
+        [TestMethod]
+        public void Constructor_CreatesAFundObject_True()
+        {
+            //Arrange
+            var fund = new Fund();
+
+            //Act
+
+            //Assert
+            Assert.IsInstanceOfType(fund, typeof(Category));
+        }
     }
 }
