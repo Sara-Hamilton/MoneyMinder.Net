@@ -16,7 +16,7 @@ namespace MoneyMinder.Net.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        private ICategoryRepository categoryRepo;
+        //private ICategoryRepository categoryRepo;
         private readonly MoneyDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -118,7 +118,6 @@ namespace MoneyMinder.Net.Controllers
         {
             //categoryRepo.DeleteAll();
             _db.Categories.RemoveRange(_db.Categories);
-            _db.SaveChanges();
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
