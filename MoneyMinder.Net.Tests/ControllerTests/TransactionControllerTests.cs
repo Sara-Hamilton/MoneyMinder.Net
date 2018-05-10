@@ -33,14 +33,14 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         {
             catMock.Setup(m => m.Categories).Returns(new Category[]
             {
-                new Category { CategoryId = 1, Name = "Clothing" },
+                new Category { CategoryId = 1, Name = "Income" },
                 new Category { CategoryId = 2, Name = "Savings" },
                 new Category { CategoryId = 3, Name = "Vacation" }
             }.AsQueryable());
 
             fundMock.Setup(m => m.Funds).Returns(new Fund[]
             {
-                new Fund { FundId = 1, Name = "House Account" },
+                new Fund { FundId = 1, Name = "General" },
                 new Fund { FundId = 2, Name = "Escrow" },
                 new Fund { FundId = 3, Name = "Savings" },
             }.AsQueryable());
@@ -76,6 +76,53 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(List<Transaction>));
+        }
+
+        //[TestMethod]
+        //public void TransactionMock_IndexModelContainsTransactions_Collection()
+        //{
+        //    // Arrange
+        //    DbSetup();
+        //    TransactionController controller = new TransactionController(transactionMock.Object);
+        //    Transaction testTransaction = new Transaction();
+        //    testTransaction.Description = "Paycheck";
+        //    testTransaction.FundId = 1;
+        //    testTransaction.Type = "Deposit";
+        //    testTransaction.Date = new DateTime(2018, 03, 01);
+        //    testTransaction.Amount = 523.72m;
+        //    testTransaction.CategoryId = 1;
+        //    testTransaction.FundId = 1;
+
+        //    // Act
+        //    ViewResult indexView = controller.Index() as ViewResult;
+        //    List<Transaction> collection = indexView.ViewData.Model as List<Transaction>;
+
+        //    // Assert
+        //    CollectionAssert.Contains(collection, testTransaction);
+        //}
+
+        [TestMethod]
+        public void TransactionMock_PostViewResultCreate_ViewResult()
+        {
+            // Arrange
+            Transaction testTransaction = new Transaction();
+            testTransaction.Description = "Paycheck";
+            testTransaction.FundId = 1;
+            testTransaction.Type = "Deposit";
+            testTransaction.Date = new DateTime(2018, 03, 01);
+            testTransaction.Amount = 523.72m;
+            testTransaction.CategoryId = 1;
+            testTransaction.FundId = 1;
+
+            DbSetup();
+            TransactionController controller = new TransactionController(transactionMock.Object);
+
+            // Act
+            var resultView = controller.Create(testTransaction) as RedirectToActionResult;
+
+
+            // Assert
+            Assert.IsInstanceOfType(resultView, typeof(ViewComponent));
         }
 
     }
