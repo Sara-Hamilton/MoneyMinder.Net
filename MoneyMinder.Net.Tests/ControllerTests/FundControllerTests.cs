@@ -74,5 +74,26 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             CollectionAssert.Contains(collection, testFund);
         }
+
+        [TestMethod]
+        public void FundMock_PostViewResultCreate_ViewResult()
+        {
+            // Arrange
+            Fund testFund = new Fund
+            {
+                FundId = 1,
+                Name = "House Account"
+            };
+
+            DbSetup();
+            FundController controller = new FundController(mock.Object);
+
+            // Act
+            var resultView = controller.Create(testFund) as RedirectToActionResult;
+
+
+            // Assert
+            Assert.IsInstanceOfType(resultView, typeof(ContentResult));
+        }
     }
 }
