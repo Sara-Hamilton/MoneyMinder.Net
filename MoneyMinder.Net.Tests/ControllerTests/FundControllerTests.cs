@@ -56,5 +56,23 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             Assert.IsInstanceOfType(result, typeof(List<Fund>));
         }
+
+        [TestMethod]
+        public void FundMock_IndexModelContainsFunds_Collection()
+        {
+            // Arrange
+            DbSetup();
+            FundController controller = new FundController(mock.Object);
+            Fund testFund = new Fund();
+            testFund.Name = "House Account";
+            testFund.FundId = 1;
+
+            // Act
+            ViewResult indexView = controller.Index() as ViewResult;
+            List<Category> collection = indexView.ViewData.Model as List<Category>;
+
+            // Assert
+            CollectionAssert.Contains(collection, testFund);
+        }
     }
 }
