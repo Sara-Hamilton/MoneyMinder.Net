@@ -32,7 +32,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_GetViewResultIndex_ActionResult()
+        public void FundMock_GetViewResultIndex_ActionResult()
         {
             //Arrange
             FundController controller = new FundController(mock.Object);

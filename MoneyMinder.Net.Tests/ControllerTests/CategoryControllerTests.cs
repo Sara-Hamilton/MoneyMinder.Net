@@ -32,7 +32,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_GetViewResultIndex_ActionResult()
+        public void CategoryMock_GetViewResultIndex_ActionResult()
         {
             //Arrange
             CategoryController controller = new CategoryController(mock.Object);
@@ -45,7 +45,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_IndexContainsModelData_List()
+        public void CategoryMock_IndexContainsModelData_List()
         {
             // Arrange
             ViewResult indexView = new CategoryController(mock.Object).Index() as ViewResult;
@@ -58,7 +58,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_IndexModelContainsCategories_Collection()
+        public void CategoryMock_IndexModelContainsCategories_Collection()
         {
             // Arrange
             DbSetup();
@@ -76,7 +76,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_PostViewResultCreate_ViewResult()
+        public void CategoryMock_PostViewResultCreate_ViewResult()
         {
             // Arrange
             Category testCategory = new Category
@@ -97,7 +97,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void Mock_GetDetails_ReturnsView()
+        public void CategoryMock_GetDetails_ReturnsView()
         {
             // Arrange
             Category testCategory = new Category
@@ -119,7 +119,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void DB_CreatesNewEntries_Collection()
+        public void CategoryDB_CreatesNewEntries_Collection()
         {
             // Arrange
             CategoryController controller = new CategoryController(db);
@@ -135,7 +135,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void DB_DbStartsEmpty_0()
+        public void CategoryDB_DbStartsEmpty_0()
         {
             //Arrange
             //Act
@@ -146,7 +146,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void DB_EditUpdatesInDatabase_String()
+        public void CategoryDB_EditUpdatesInDatabase_String()
         {
             // Arrange
             Category testCategory = new Category { CategoryId = 1, Name = "Clothing" };
@@ -161,7 +161,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void DB_RemoveDeletesFromDatabase_Void()
+        public void CategoryDB_RemoveDeletesFromDatabase_Void()
         {
             //Arrange
             Category testCategory1 = new Category { CategoryId = 1, Name = "Clothing" };
@@ -177,7 +177,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
         }
 
         [TestMethod]
-        public void DB_DeleteAllDeletesAllCategoriesFromDatabase_Void()
+        public void CategoryDB_DeleteAllDeletesAllCategoriesFromDatabase_Void()
         {
             //Arrange
             Category testCategory1 = new Category { CategoryId = 1, Name = "Clothing" };
