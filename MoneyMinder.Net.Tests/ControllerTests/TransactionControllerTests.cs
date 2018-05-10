@@ -64,6 +64,19 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
-   
+
+        [TestMethod]
+        public void TransactionMock_IndexContainsModelData_List()
+        {
+            // Arrange
+            ViewResult indexView = new TransactionController(transactionMock.Object).Index() as ViewResult;
+
+            // Act
+            var result = indexView.ViewData.Model;
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(List<Fund>));
+        }
+
     }
 }
