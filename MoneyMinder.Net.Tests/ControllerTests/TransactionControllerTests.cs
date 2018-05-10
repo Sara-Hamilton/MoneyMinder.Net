@@ -62,8 +62,8 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             var result = controller.Index();
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(TestResult));
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
- 
+   
     }
 }
