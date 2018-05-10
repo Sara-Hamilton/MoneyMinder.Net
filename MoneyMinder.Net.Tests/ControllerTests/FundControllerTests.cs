@@ -157,7 +157,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             db.Edit(testFund);
 
             //Assert
-            Assert.AreEqual("Edited Test Fund!", testFund.Name);
+            Assert.AreEqual("Edited Test Fund", testFund.Name);
         }
     }
 }
