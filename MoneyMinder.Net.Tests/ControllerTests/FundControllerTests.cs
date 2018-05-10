@@ -117,5 +117,21 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             Assert.IsInstanceOfType(resultView, typeof(ViewResult));
             Assert.IsInstanceOfType(model, typeof(Fund));
         }
+
+        [TestMethod]
+        public void FundDB_CreatesNewEntries_Collection()
+        {
+            // Arrange
+            FundController controller = new FundController(db);
+            Fund testFund = new Fund();
+            testFund.Name = "TestDb Fund";
+
+            // Act
+            controller.Create(testFund);
+            var collection = (controller.Index() as ViewResult).ViewData.Model as List<Category>;
+
+            // Assert
+            CollectionAssert.Contains(collection, testFund);
+        }
     }
 }
