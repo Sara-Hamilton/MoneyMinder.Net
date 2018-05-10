@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoneyMinder.Net.Models;
 using MoneyMinder.Net.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MoneyMinder.Net.Controllers
 {
+    [Authorize]
     public class FundController : Controller
     {
         private IFundRepository fundRepo;

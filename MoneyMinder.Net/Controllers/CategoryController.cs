@@ -10,6 +10,7 @@ using MoneyMinder.Net.Data;
 
 namespace MoneyMinder.Net.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private ICategoryRepository categoryRepo;
