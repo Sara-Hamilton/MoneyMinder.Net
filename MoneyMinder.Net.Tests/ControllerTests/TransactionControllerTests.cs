@@ -44,12 +44,26 @@ namespace MoneyMinder.Net.Tests.ControllerTests
                 new Fund { FundId = 2, Name = "Escrow" },
                 new Fund { FundId = 3, Name = "Savings" },
             }.AsQueryable());
+        }
 
             //var testDate = new DateTime(2018, 03, 01);
             //transactionMock.Setup(m => m.Transactions).Returns(new Transaction[]
             //{
             //    new Transaction { TransactionId = 1, Description = "Paycheck", Type = "Deposit", Date = testDate, Amount = 523.72m, CategoryId = 1, FundId = 1}
             //}).AsQueryable());
+
+        [TestMethod]
+        public void TransactionMock_GetViewResultIndex_ActionResult()
+        {
+            //Arrange
+            TransactionController controller = new TransactionController(transactionMock.Object);
+
+            //Act
+            var result = controller.Index();
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(TestResult));
         }
+ 
     }
 }
