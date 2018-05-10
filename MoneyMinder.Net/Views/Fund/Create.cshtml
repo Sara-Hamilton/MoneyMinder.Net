@@ -1,0 +1,19 @@
+﻿@model MoneyMinder.Net.Models.Fund
+
+@{
+    ViewData["Title"] = "Fund - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a new Fund</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name)<br />
+    @Html.EditorFor(model => model.Name)<br />
+  
+    <input type="submit" value="Create" class="btn btn-default" />
+}
+
+@Html.ActionLink("Back to Funds", "Index")
