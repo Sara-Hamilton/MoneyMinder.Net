@@ -175,5 +175,21 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.AreEqual(1, db.Funds.Count());
         }
+
+        [TestMethod]
+        public void FundDB_DeleteAllDeletesAllFundFromDatabase_Void()
+        {
+            //Arrange
+            Fund testFund1 = new Fund { FundId = 1, Name = "House Account" };
+            Fund testFund2 = new Fund { FundId = 2, Name = "Escrow" };
+            db.Save(testFund1);
+            db.Save(testFund2);
+
+            //Act
+            db.DeleteAll();
+
+            //Assert
+            Assert.AreEqual(1, db.Funds.Count());
+        }
     }
 }
