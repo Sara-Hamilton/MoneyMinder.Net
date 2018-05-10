@@ -43,5 +43,18 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             //Assert
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
+
+        [TestMethod]
+        public void FundMock_IndexContainsModelData_List()
+        {
+            // Arrange
+            ViewResult indexView = new FundController(mock.Object).Index() as ViewResult;
+
+            // Act
+            var result = indexView.ViewData.Model;
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(List<Category>));
+        }
     }
 }
