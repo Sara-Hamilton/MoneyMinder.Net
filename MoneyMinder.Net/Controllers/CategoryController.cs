@@ -17,33 +17,36 @@ namespace MoneyMinder.Net.Controllers
     public class CategoryController : Controller
     {
         private ICategoryRepository categoryRepo;
-        //private readonly MoneyDbContext _db;
-        //private readonly UserManager<ApplicationUser> _userManager;
+        private readonly MoneyDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        //public CategoryController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
-        //{
-        //    _userManager = userManager;
-        //    _db = db;
-        //}
-
-        public CategoryController(ICategoryRepository repo = null)
+        public CategoryController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
         {
-            if (repo == null)
-            {
-                this.categoryRepo = new EFCategoryRepository();
-            }
-            else
-            {
-                this.categoryRepo = repo;
-            }
+            _userManager = userManager;
+            _db = db;
         }
+
+        //public CategoryController(UserManager<ApplicationUser> userManager, ICategoryRepository repo = null)
+        //{
+        //    if (repo == null)
+        //    {
+        //        this.categoryRepo = new EFCategoryRepository();
+        //        _userManager = userManager;
+        //    }
+        //    else
+        //    {
+        //        this.categoryRepo = repo;
+        //        _userManager = userManager;
+        //    }
+        //}
 
         public async Task<IActionResult> Index()
         {
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            //var currentUser = await _userManager.FindByIdAsync(userId);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            return View(_db.Categories.Where(x => x.User.Id == currentUser.Id));
             //return View(categoryRepo.Categories.Where(x => x.User.Id == currentUser.Id).ToList());
-            return View(categoryRepo.Categories.ToList());
+            //return View(categoryRepo.Categories.ToList());
         }
 
         public IActionResult Create()
@@ -52,17 +55,22 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public async Task<IActionResult> Create(Category category)
         {
-            categoryRepo.Save(category);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            category.User = currentUser;
+            //categoryRepo.Save(category);
+            _db.Categories.Add(category);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public IActionResult Details(int id)
-        {
-            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            return View(thisCategory);
-        }
+        //public IActionResult Details(int id)
+        //{
+        //    var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+        //    return View(thisCategory);
+        //}
 
         public IActionResult Edit(int id)
         {
