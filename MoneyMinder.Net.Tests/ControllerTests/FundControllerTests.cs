@@ -69,7 +69,7 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             // Act
             ViewResult indexView = controller.Index() as ViewResult;
-            List<Category> collection = indexView.ViewData.Model as List<Category>;
+            List<Fund> collection = indexView.ViewData.Model as List<Fund>;
 
             // Assert
             CollectionAssert.Contains(collection, testFund);
