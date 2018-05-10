@@ -74,14 +74,17 @@ namespace MoneyMinder.Net.Controllers
 
         public IActionResult Edit(int id)
         {
-            var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
+            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost]
         public IActionResult Edit(Category category)
         {
-            categoryRepo.Edit(category);
+            _db.Entry(category).State = EntityState.Modified;
+            _db.SaveChanges();
+            //categoryRepo.Edit(category);
             return RedirectToAction("Index");
         }
 
