@@ -24,9 +24,9 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
         public void Dispose()
         {
-            catDb.DeleteAll();
-            fundDb.DeleteAll();
             transactionDb.DeleteAll();
+            fundDb.DeleteAll();
+            catDb.DeleteAll();
         }
 
         private void DbSetup()
@@ -42,15 +42,16 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             {
                 new Fund { FundId = 1, Name = "General" },
                 new Fund { FundId = 2, Name = "Escrow" },
-                new Fund { FundId = 3, Name = "Savings" },
+                new Fund { FundId = 3, Name = "Savings" }
             }.AsQueryable());
 
 
             //var testDate = new DateTime(2018, 03, 01);
-            //transactionMock.Setup(m => m.Transactions).Returns(new Transaction[]
-            //{
-            //    new Transaction { TransactionId = 1, Description = "Paycheck", Type = "Deposit", Date = testDate, Amount = 523.72m, CategoryId = 1, FundId = 1}
-            //}).AsQueryable());
+            transactionMock.Setup(m => m.Transactions).Returns(new Transaction[]
+            {
+                new Transaction { TransactionId = 1, Description = "Paycheck", Type = "Deposit", Date = new DateTime(2018, 03, 01), Amount = 523.72m, CategoryId = 1, FundId = 1},
+                new Transaction { TransactionId = 2, Description = "Extra Money", Type = "Deposit", Date = new DateTime(2018, 04, 01), Amount = 4.07m, CategoryId = 2, FundId = 3}
+            }.AsQueryable());
 
         }
 
@@ -80,28 +81,28 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             Assert.IsInstanceOfType(result, typeof(List<Transaction>));
         }
 
-        //[TestMethod]
-        //public void TransactionMock_IndexModelContainsTransactions_Collection()
-        //{
-        //    // Arrange
-        //    DbSetup();
-        //    TransactionController controller = new TransactionController(transactionMock.Object);
-        //    Transaction testTransaction = new Transaction();
-        //    testTransaction.Description = "Paycheck";
-        //    testTransaction.FundId = 1;
-        //    testTransaction.Type = "Deposit";
-        //    testTransaction.Date = new DateTime(2018, 03, 01);
-        //    testTransaction.Amount = 523.72m;
-        //    testTransaction.CategoryId = 1;
-        //    testTransaction.FundId = 1;
+        [TestMethod]
+        public void TransactionMock_IndexModelContainsTransactions_Collection()
+        {
+            // Arrange
+            DbSetup();
+            TransactionController controller = new TransactionController(transactionMock.Object);
+            Transaction testTransaction = new Transaction();
+            testTransaction.Description = "Paycheck";
+            testTransaction.FundId = 1;
+            testTransaction.Type = "Deposit";
+            testTransaction.Date = new DateTime(2018, 03, 01);
+            testTransaction.Amount = 523.72m;
+            testTransaction.CategoryId = 1;
+            testTransaction.FundId = 1;
 
-        //    // Act
-        //    ViewResult indexView = controller.Index() as ViewResult;
-        //    List<Transaction> collection = indexView.ViewData.Model as List<Transaction>;
+            // Act
+            ViewResult indexView = controller.Index() as ViewResult;
+            List<Transaction> collection = indexView.ViewData.Model as List<Transaction>;
 
-        //    // Assert
-        //    CollectionAssert.Contains(collection, testTransaction);
-        //}
+            // Assert
+            CollectionAssert.Contains(collection, testTransaction);
+        }
 
         [TestMethod]
         public void TransactionMock_PostViewResultCreate_ViewResult()
@@ -183,6 +184,38 @@ namespace MoneyMinder.Net.Tests.ControllerTests
 
             //Assert
             Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void TransactionDB_EditUpdatesInDatabase_String()
+        {
+            // Arrange
+            Category testCategory = new Category { CategoryId = 5, Name = "Income" };
+            Fund testFund = new Fund { FundId = 5, Name = "General" };
+            Transaction testTransaction = new Transaction { TransactionId = 5, Description = "Paycheck", Type = "Deposit", Date = new DateTime(2018, 03, 01), Amount = 523.72m, CategoryId = 5, FundId = 5 };
+
+            //Act
+            testTransaction.Description = "Edited Test Transaction";
+            transactionDb.Edit(testTransaction);
+
+            //Assert
+            Assert.AreEqual("Edited Test Transaction", testTransaction.Description);
+        }
+
+        [TestMethod]
+        public void TransactionDB_RemoveDeletesFromDatabase_Void()
+        {
+            //Arrange
+            Transaction testTransaction1 = new Transaction { TransactionId = 5, Description = "Paycheck", Type = "Deposit", Date = new DateTime(2018, 03, 01), Amount = 523.72m, CategoryId = 5, FundId = 5 };
+            Transaction testTransaction2 = new Transaction { TransactionId = 2, Description = "Extra Money", Type = "Deposit", Date = new DateTime(2018, 04, 01), Amount = 4.07m, CategoryId = 2, FundId = 3 };
+            transactionDb.Save(testTransaction1);
+            transactionDb.Save(testTransaction2);
+
+            //Act
+            transactionDb.Remove(testTransaction1);
+
+            //Assert
+            Assert.AreEqual(1, transactionDb.Transactions.Count());
         }
 
     }
