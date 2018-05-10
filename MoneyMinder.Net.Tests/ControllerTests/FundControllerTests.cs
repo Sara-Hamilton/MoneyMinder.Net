@@ -95,5 +95,27 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             // Assert
             Assert.IsInstanceOfType(resultView, typeof(RedirectToActionResult));
         }
+
+        [TestMethod]
+        public void FundMock_GetDetails_ReturnsView()
+        {
+            // Arrange
+            Fund testFund = new Fund
+            {
+                FundId = 1,
+                Name = "House Account"
+            };
+
+            DbSetup();
+            FundController controller = new FundController(mock.Object);
+
+            // Act
+            var resultView = controller.Details(testFund.FundId) as ViewResult;
+            var model = resultView.ViewData.Model as Category;
+
+            // Assert
+            Assert.IsInstanceOfType(resultView, typeof(ViewResult));
+            Assert.IsInstanceOfType(model, typeof(Fund));
+        }
     }
 }
