@@ -65,6 +65,9 @@ namespace MoneyMinder.Net.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             transaction.User = currentUser;
             //transactionRepo.Save(transaction);
+            var currentFund = _db.Funds.FirstOrDefault(x => x.FundId == transaction.FundId);
+            currentFund.AdjustTotal(transaction);
+            _db.Entry(currentFund).State = EntityState.Modified;
             _db.Transactions.Add(transaction);
             _db.SaveChanges();
             return RedirectToAction("Index");
