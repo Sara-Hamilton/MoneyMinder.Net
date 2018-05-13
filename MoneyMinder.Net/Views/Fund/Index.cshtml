@@ -14,20 +14,26 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
             <th></th>
         </tr>
 
         @foreach (var listFund in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelFund => listFund.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelFund => listFund.Name)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelFund => listFund.Total)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+            </td>
+        </tr>
         }
     </table>
 }
