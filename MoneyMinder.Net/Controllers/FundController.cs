@@ -77,11 +77,14 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
-        //public IActionResult Details(int id)
-        //{
-        //    var thisFund = fundRepo.Funds.FirstOrDefault(funds => funds.FundId == id);
-        //    return View(thisFund);
-        //}
+        public IActionResult Details(int id)
+        {
+            //var thisFund = _db.Funds.FirstOrDefault(funds => funds.FundId == id);
+            ViewBag.FundTotal = _db.Funds.FirstOrDefault(funds => funds.FundId == id).Total.ToString("0.00");
+            return View(_db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(transactions => transactions.FundId == id));
+            //var theseTransactions = _db.Transactions.Where(transactions => transactions.FundId == id); 
+            //return View(theseTransactions);
+        }
 
         public IActionResult Edit(int id)
         {
