@@ -19,7 +19,7 @@ namespace MoneyMinder.Net.Controllers
         //private ICategoryRepository categoryRepo;
         private readonly MoneyDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        private ICategoryRepository @object;
+        //private ICategoryRepository @object;
 
         public CategoryController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
         {
@@ -27,10 +27,10 @@ namespace MoneyMinder.Net.Controllers
             _db = db;
         }
 
-        public CategoryController(ICategoryRepository @object)
-        {
-            this.@object = @object;
-        }
+        //public CategoryController(ICategoryRepository @object)
+        //{
+        //    this.@object = @object;
+        //}
 
         //public CategoryController(UserManager<ApplicationUser> userManager, ICategoryRepository repo = null)
         //{

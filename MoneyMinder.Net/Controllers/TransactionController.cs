@@ -43,6 +43,8 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+            ViewBag.Categories = (_db.Categories.Where(x => x.User.Id == currentUser.Id)).Count();
+            ViewBag.Funds = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id)).Count();
             return View(_db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id));
             //return View(transactionRepo.Transactions.ToList());
         }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Fund";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Funds</h2>
+<h2>@User.Identity.Name's Funds</h2>
 
 @if (Model.Any())
 {
