@@ -31,18 +31,18 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             }.AsQueryable());
         }
 
-        [TestMethod]
-        public void CategoryMock_GetViewResultIndex_ActionResult()
-        {
-            //Arrange
-            CategoryController controller = new CategoryController(mock.Object);
+        //[TestMethod]
+        //public void CategoryMock_GetViewResultIndex_ActionResult()
+        //{
+        //    //Arrange
+        //    CategoryController controller = new CategoryController(mock.Object);
 
-            //Act
-            var result = controller.Index();
+        //    //Act
+        //    var result = controller.Index();
 
-            //Assert
-            Assert.IsInstanceOfType(result, typeof(ActionResult));
-        }
+        //    //Assert
+        //    Assert.IsInstanceOfType(result, typeof(ActionResult));
+        //}
 
         //[TestMethod]
         //public void CategoryMock_IndexContainsModelData_List()

@@ -31,18 +31,18 @@ namespace MoneyMinder.Net.Tests.ControllerTests
             }.AsQueryable());
         }
 
-        [TestMethod]
-        public void FundMock_GetViewResultIndex_ActionResult()
-        {
-            //Arrange
-            FundController controller = new FundController(mock.Object);
+        //[TestMethod]
+        //public void FundMock_GetViewResultIndex_ActionResult()
+        //{
+        //    //Arrange
+        //    FundController controller = new FundController(mock.Object);
 
-            //Act
-            var result = controller.Index();
+        //    //Act
+        //    var result = controller.Index();
 
-            //Assert
-            Assert.IsInstanceOfType(result, typeof(ActionResult));
-        }
+        //    //Assert
+        //    Assert.IsInstanceOfType(result, typeof(ActionResult));
+        //}
 
         //[TestMethod]
         //public void FundMock_IndexContainsModelData_List()

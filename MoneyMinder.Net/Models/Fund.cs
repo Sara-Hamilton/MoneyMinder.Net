@@ -14,7 +14,7 @@ namespace MoneyMinder.Net.Models
         public int FundId { get; set; }
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? Total { get; set; } = 0;
+        public decimal Total { get; set; } = 0;
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? Minimum { get; set; }
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
@@ -47,6 +47,20 @@ namespace MoneyMinder.Net.Models
         public override int GetHashCode()
         {
             return this.FundId.GetHashCode();
+        }
+
+        public void AdjustTotal(Transaction transaction)
+        {
+            decimal newTotal = 0m;
+            if (transaction.Type == "Deposit")
+            {
+                newTotal = this.Total += transaction.Amount;
+            }
+            if (transaction.Type == "Withdrawal")
+            {
+                newTotal = this.Total -= transaction.Amount;
+            }
+            this.Total = newTotal;
         }
     }
 }

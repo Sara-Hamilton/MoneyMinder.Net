@@ -37,5 +37,20 @@ namespace MoneyMinder.Net.Tests
             //Assert
             Assert.IsInstanceOfType(fund, typeof(Fund));
         }
+
+        [TestMethod]
+        public void FundAdjustTotal_AdjustsTotal_True()
+        {
+            //Arrange
+            Category testCategory = new Category { CategoryId = 5, Name = "Income" };
+            Fund testFund = new Fund { FundId = 5, Name = "General", Total = 2.99m };
+            Transaction testTransaction = new Transaction { TransactionId = 5, Description = "Paycheck", Type = "Deposit", Date = new DateTime(2018, 03, 01), Amount = 523.72m, CategoryId = 5, FundId = 5 };
+
+            //Act
+            testFund.AdjustTotal(testTransaction);
+
+            //Assert
+            Assert.AreEqual(testFund.Total, 526.71m);
+        }
     }
 }

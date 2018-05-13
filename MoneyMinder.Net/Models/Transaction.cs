@@ -20,10 +20,10 @@ namespace MoneyMinder.Net.Models
         [Required]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? PreviousTotal { get; set; } = 0;
+        public decimal PreviousTotal { get; set; } = 0;
 
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
@@ -61,5 +61,6 @@ namespace MoneyMinder.Net.Models
         {
             return this.TransactionId.GetHashCode();
         }
+
     }
 }
