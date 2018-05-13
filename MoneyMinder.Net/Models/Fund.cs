@@ -14,7 +14,7 @@ namespace MoneyMinder.Net.Models
         public int FundId { get; set; }
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? Total { get; set; }
+        public decimal? Total { get; set; } = 0;
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? Minimum { get; set; }
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]

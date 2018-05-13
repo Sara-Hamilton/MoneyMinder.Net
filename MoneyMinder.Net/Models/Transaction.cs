@@ -17,12 +17,13 @@ namespace MoneyMinder.Net.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
+        [Required]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal? Amount { get; set; }
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? PreviousTotal { get; set; }
+        public decimal? PreviousTotal { get; set; } = 0;
 
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }

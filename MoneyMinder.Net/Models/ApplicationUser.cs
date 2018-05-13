@@ -11,6 +11,6 @@ namespace MoneyMinder.Net.Models
     {
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? UserTotal { get; set; }
+        public decimal? UserTotal { get; set; } = 0;
     }
 }
