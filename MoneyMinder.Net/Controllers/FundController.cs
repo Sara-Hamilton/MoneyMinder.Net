@@ -48,7 +48,14 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Funds.Where(x => x.User.Id == currentUser.Id));
+            var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id);
+            List<decimal> userTotal = new List<decimal> { };
+            foreach (Fund fund in fundsList)
+            {
+                userTotal.Add(fund.Total);
+            }
+            ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
+            return View(fundsList);
             //return View(fundRepo.Funds.Where(x => x.User.Id == currentUser.Id).ToList());
             //return View(fundRepo.Funds.ToList());
         }
