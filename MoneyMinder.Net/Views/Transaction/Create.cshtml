@@ -37,46 +37,12 @@
             <span asp-validation-for="Description" class="text-danger"></span>
 
             <label asp-for="FundId" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
-
-            @*@Html.DropDownList("FundId", @ViewBag.FundId, String.Empty,new { @class = "form-control" })*@
-
-            <select asp-for"FundId" class="form-control" id="fundId">
-                @foreach (var fund in @ViewBag.FundId)
-        {
-            <option value=@fund.Value>@fund.Value</option>
-}
-            </select>
-
-
+            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
         </div>
+        <input type="submit" value="Create" class="btn btn-default" />
     </div>
 </form>
-
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Date)<br />
-    @Html.EditorFor(model => model.Date)<br />
-
-    @Html.LabelFor(model => model.Type)<br />
-    @Html.DropDownListFor(model => model.Type, new SelectList(new[]{"Deposit",
-"Withdrawal"}))<br />
-
-    @Html.LabelFor(model => model.Description)<br />
-    @Html.EditorFor(model => model.Description)<br />
-
-    @Html.LabelFor(model => model.FundId)<br />
-    @Html.DropDownList("FundId")<br />
-
-    @Html.LabelFor(model => model.CategoryId)<br />
-    @Html.DropDownList("CategoryId")<br />
-
-    @Html.LabelFor(model => model.Amount)<br />
-    <span>$</span>@Html.EditorFor(model => model.Amount)<br />
-    <span asp-validation-for="Amount" class="text-danger"></span>
-
-    <input type="submit" value="Create" class="btn btn-default" />
-}
-
-@Html.ActionLink("Back to Transactions", "Index")
