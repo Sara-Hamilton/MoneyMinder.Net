@@ -11,5 +11,8 @@ namespace MoneyMinder.Net.ViewModels
         [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Key]
+        public int CategoryId { get; set; }
     }
 }

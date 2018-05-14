@@ -97,12 +97,22 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([Bind("Name", "CategoryId")] CategoryViewModel model)
         {
-            _db.Entry(category).State = EntityState.Modified;
-            _db.SaveChanges();
-            //categoryRepo.Edit(category);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == model.CategoryId);
+                thisCategory.Name = model.Name;
+                _db.Entry(thisCategory).State = EntityState.Modified;
+                _db.SaveChanges();
+                //categoryRepo.Edit(category);
+                return RedirectToAction("Index");
+            }
+
+            {
+                return View();
+            }
         }
 
         public ActionResult Delete(int id)
