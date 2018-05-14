@@ -17,10 +17,8 @@ namespace MoneyMinder.Net.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        //private ICategoryRepository categoryRepo;
         private readonly MoneyDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        //private ICategoryRepository @object;
 
         public CategoryController(UserManager<ApplicationUser> userManager, MoneyDbContext db)
         {
@@ -28,32 +26,11 @@ namespace MoneyMinder.Net.Controllers
             _db = db;
         }
 
-        //public CategoryController(ICategoryRepository @object)
-        //{
-        //    this.@object = @object;
-        //}
-
-        //public CategoryController(UserManager<ApplicationUser> userManager, ICategoryRepository repo = null)
-        //{
-        //    if (repo == null)
-        //    {
-        //        this.categoryRepo = new EFCategoryRepository();
-        //        _userManager = userManager;
-        //    }
-        //    else
-        //    {
-        //        this.categoryRepo = repo;
-        //        _userManager = userManager;
-        //    }
-        //}
-
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
             return View(_db.Categories.Where(x => x.User.Id == currentUser.Id));
-            //return View(categoryRepo.Categories.Where(x => x.User.Id == currentUser.Id).ToList());
-            //return View(categoryRepo.Categories.ToList());
         }
 
         public IActionResult Create()
@@ -72,7 +49,6 @@ namespace MoneyMinder.Net.Controllers
                 Category newCategory = new Category();
                 newCategory.User = currentUser;
                 newCategory.Name = model.Name;
-                //categoryRepo.Save(category);
                 _db.Categories.Add(newCategory);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,16 +59,9 @@ namespace MoneyMinder.Net.Controllers
             }
         }
 
-        //public IActionResult Details(int id)
-        //{
-        //    var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-        //    return View(thisCategory);
-        //}
-
         public IActionResult Edit(int id)
         {
             var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
@@ -106,7 +75,6 @@ namespace MoneyMinder.Net.Controllers
                 thisCategory.Name = model.Name;
                 _db.Entry(thisCategory).State = EntityState.Modified;
                 _db.SaveChanges();
-                //categoryRepo.Edit(category);
                 return RedirectToAction("Index");
             }
 
@@ -118,16 +86,12 @@ namespace MoneyMinder.Net.Controllers
         public ActionResult Delete(int id)
         {
             var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             return View(thisCategory);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            //var thisCategory = categoryRepo.Categories.FirstOrDefault(categories => categories.CategoryId == id);
-            //categoryRepo.Remove(thisCategory);
-
             var thisCategory = _db.Categories.FirstOrDefault(categories => categories.CategoryId == id);
             _db.Categories.Remove(thisCategory);
             _db.SaveChanges();
@@ -136,14 +100,12 @@ namespace MoneyMinder.Net.Controllers
 
         public ActionResult DeleteAll(int id)
         {
-            //return View(categoryRepo.Categories.ToList());
             return View(_db.Categories.ToList());
         }
 
         [HttpPost, ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed(int id)
         {
-            //categoryRepo.DeleteAll();
             _db.Categories.RemoveRange(_db.Categories);
             _db.SaveChanges();
             return RedirectToAction("Index");

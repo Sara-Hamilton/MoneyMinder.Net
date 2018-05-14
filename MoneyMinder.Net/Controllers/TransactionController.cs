@@ -16,8 +16,6 @@ namespace MoneyMinder.Net.Controllers
     [Authorize]
     public class TransactionController : Controller
     {
-        //private ITransactionRepository transactionRepo;
-
         private readonly MoneyDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -26,18 +24,6 @@ namespace MoneyMinder.Net.Controllers
             _userManager = userManager;
             _db = db;
         }
-
-        //public TransactionController(ITransactionRepository repo = null)
-        //{
-        //    if (repo == null)
-        //    {
-        //        this.transactionRepo = new EFTransactionRepository();
-        //    }
-        //    else
-        //    {
-        //        this.transactionRepo = repo;
-        //    }
-        //}
 
         public async Task<IActionResult> Index()
         {
@@ -54,7 +40,6 @@ namespace MoneyMinder.Net.Controllers
             }
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
             return View(transactionsList);
-            //return View(transactionRepo.Transactions.ToList());
         }
 
         public async Task<IActionResult> Create()
@@ -72,7 +57,6 @@ namespace MoneyMinder.Net.Controllers
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
             transaction.User = currentUser;
-            //transactionRepo.Save(transaction);
             if(transaction.Type =="Withdrawal")
             {
                 transaction.Amount = -transaction.Amount;
@@ -88,14 +72,12 @@ namespace MoneyMinder.Net.Controllers
         public IActionResult Details(int id)
         {
             var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-            //var thisTransaction = transactionRepo.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
             return View(thisTransaction);
         }
 
         public IActionResult Edit(int id)
         {
             var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-            //var thisTransaction = transactionRepo.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
             return View(thisTransaction);
         }
 
@@ -104,23 +86,18 @@ namespace MoneyMinder.Net.Controllers
         {
             _db.Entry(transaction).State = EntityState.Modified;
             _db.SaveChanges();
-            //transactionRepo.Edit(transaction);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
             var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-            //var thisTransaction = transactionRepo.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
             return View(thisTransaction);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            //var thisTransaction = transactionRepo.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-            //transactionRepo.Remove(thisTransaction);
-
             var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
             _db.Transactions.Remove(thisTransaction);
             _db.SaveChanges();
@@ -129,14 +106,12 @@ namespace MoneyMinder.Net.Controllers
 
         public ActionResult DeleteAll(int id)
         {
-            //return View(transactionRepo.Transactions.ToList());
             return View(_db.Transactions.ToList());
         }
 
         [HttpPost, ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed(int id)
         {
-            //transactionRepo.DeleteAll();
             _db.Transactions.RemoveRange(_db.Transactions);
             _db.SaveChanges();
             return RedirectToAction("Index");
