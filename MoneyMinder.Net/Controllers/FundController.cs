@@ -10,6 +10,7 @@ using MoneyMinder.Net.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using MoneyMinder.Net.ViewModels;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -66,15 +67,25 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Fund fund)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name")] FundViewModel model)
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            fund.User = currentUser;
-            //categoryRepo.Save(fund);
-            _db.Funds.Add(fund);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            {
+                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var currentUser = await _userManager.FindByIdAsync(userId);
+                Fund newFund = new Fund();
+                newFund.User = currentUser;
+                newFund.Name = model.Name;
+                //categoryRepo.Save(fund);
+                _db.Funds.Add(newFund);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            {
+                return View();
+            }
         }
 
         public IActionResult Details(int id)

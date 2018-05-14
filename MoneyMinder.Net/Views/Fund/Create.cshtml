@@ -5,15 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add a new Fund</h2>
-<hr />
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h2>Add a new Fund</h2>
+        <hr />
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Name)<br />
-    @Html.EditorFor(model => model.Name)<br />
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
 
-    <input type="submit" value="Create" class="btn btn-default" />
-}
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name"></span>
+            <span class="col-md-2"></span>
 
-@Html.ActionLink("Back to Funds", "Index")
+        </div>
+        <input class="btn btn-default" type="submit" value="Create" />
+
+    </div>
+</form>
