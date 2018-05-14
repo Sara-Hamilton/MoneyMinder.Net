@@ -1,4 +1,6 @@
-﻿@model MoneyMinder.Net.Models.Transaction
+﻿@using MoneyMinder.Net.Models
+@model MoneyMinder.Net.Models.Transaction
+
 
 @{
     ViewData["Title"] = "Transaction - Create";
@@ -8,7 +10,7 @@
 <h2>Add a new Transaction</h2>
 <hr />
 
-@*<form asp-action="Create">
+<form asp-action="Create">
     <div class="form-horizontal">
         <h3>Add a new Transaction</h3>
         <hr />
@@ -20,9 +22,37 @@
             <input asp-for="Date" class="form-control" />
             <span asp-validation-for="Date" class="text-danger"></span>
 
+            <label asp-for="Type" class="col-md-2 control-label"></label>
+            <select asp-for="Type" class="form-control">
+                <option>Deposit</option>
+                <option>Withdrawal</option>
+            </select>
+
+            <label asp-for="Amount" class="col-md-2 control-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+            <label asp-for="FundId" class="col-md-2 control-label"></label>
+
+
+            @*@Html.DropDownList("FundId", @ViewBag.FundId, String.Empty,new { @class = "form-control" })*@
+
+            <select asp-for"FundId" class="form-control" id="fundId">
+                @foreach (var fund in @ViewBag.FundId)
+        {
+            <option value=@fund.Value>@fund.Value</option>
+}
+            </select>
+
+
+
         </div>
     </div>
-</form>*@
+</form>
 
 @using (Html.BeginForm())
 {
