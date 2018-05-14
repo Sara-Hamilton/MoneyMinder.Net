@@ -20,10 +20,10 @@
             <input type="date" name="ToDate" class="form-control" />
 
             <label for="IncludeFunds" class="col-md-2 control-label">Funds</label>
-               @foreach (SelectListItem fund in ViewBag.FundId)
-               { 
+            @foreach (SelectListItem fund in ViewBag.FundId)
+            { 
                 <input type="checkbox" name=@fund.Text value=@fund.Value>@fund.Text
-               }
+            }
             <p></p>
           
             <label for="IncludeCategories" class="col-md-2 control-label">Categories</label>
