@@ -25,9 +25,13 @@
                     <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
                     <div class="col-md-4">@Html.DisplayFor(modelFund => listFund.Total)</div>
                     <div class="col-md-4">
-                        @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-                                </div>
+                        @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
+                        @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
+                        {
+                             <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                        }
+                    
+                    </div>
                 </div>
              </div>
         }

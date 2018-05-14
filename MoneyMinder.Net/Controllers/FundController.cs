@@ -30,6 +30,15 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+
+            var transactions = _db.Transactions.Where(x => x.User.Id == currentUser.Id);
+            List<int> userTransactionIds = new List<int> { };
+            foreach (Transaction transaction in transactions)
+            {
+                userTransactionIds.Add(transaction.FundId);
+            }
+            ViewBag.UserTransactionIds = userTransactionIds;
+
             var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Fund fund in fundsList)
