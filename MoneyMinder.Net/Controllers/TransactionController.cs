@@ -32,11 +32,11 @@ namespace MoneyMinder.Net.Controllers
             
             ViewBag.Categories = (_db.Categories.Where(x => x.User.Id == currentUser.Id)).Count();
             ViewBag.Funds = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id)).Count();
-            var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id);
+            var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).OrderByDescending(x => x.TransactionId);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Transaction transaction in transactionsList)
             {
-                    userTotal.Add(transaction.Amount);
+                userTotal.Add(transaction.Amount);
             }
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
             return View(transactionsList);

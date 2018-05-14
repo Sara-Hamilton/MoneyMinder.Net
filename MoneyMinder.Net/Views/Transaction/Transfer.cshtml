@@ -32,6 +32,8 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description"></span>
 
+            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
             <label asp-for="FromFund" class="col-md-2 control-label"></label>
             <div class="form-group">
@@ -52,15 +54,6 @@
                     }
                 </select>
             </div>
-
-            @*<label asp-for="FromFund" id="FromFund" name="FromFund" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control", @name = "FromFund" })
-
-            <label asp-for="ToFund" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control", @name = "ToFund" })*@
-
-            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
         </div>
         <input type="submit" value="Transfer" class="btn btn-default" />
