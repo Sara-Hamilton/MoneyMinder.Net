@@ -29,6 +29,8 @@ namespace MoneyMinder.Net.Models
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public int FundId { get; set; }
+        public int FromFund { get; set; }
+        public int ToFund { get; set; }
         public virtual Fund Fund { get; set; }
         public virtual ApplicationUser User { get; set; }
 

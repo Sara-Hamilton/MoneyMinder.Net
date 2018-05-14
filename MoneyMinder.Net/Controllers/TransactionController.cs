@@ -69,6 +69,56 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Transfer()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id), "CategoryId", "Name");
+            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id), "FundId", "Name");
+            return View();
+        }
+
+        [HttpPost, ActionName("Transfer")]
+        public async Task<IActionResult> TransferConfirmed()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+
+            Transaction withdrawal = new Transaction();
+            withdrawal.Type = "Withdrawal";
+            withdrawal.Date = DateTime.Parse(Request.Form["Date"]);
+            withdrawal.Amount = -(Decimal.Parse(Request.Form["Amount"]));
+            withdrawal.Description = Request.Form["Description"];
+            withdrawal.CategoryId = int.Parse(Request.Form["CategoryId"]);
+            withdrawal.FundId = int.Parse(Request.Form["FromFund"]);
+            withdrawal.User = currentUser;
+
+            var withdrawalFund = _db.Funds.FirstOrDefault(x => x.FundId == withdrawal.FromFund);
+            withdrawalFund.AdjustTotal(withdrawal);
+
+            Transaction deposit = new Transaction();
+            deposit.Type = "Deposit";
+            deposit.Date = DateTime.Parse(Request.Form["Date"]);
+            deposit.Amount = Decimal.Parse(Request.Form["Amount"]);
+            deposit.Description = Request.Form["Description"];
+            deposit.CategoryId = int.Parse(Request.Form["CategoryId"]);
+            deposit.FundId = int.Parse(Request.Form["FromFund"]);
+            deposit.User = currentUser;
+
+            var depositFund = _db.Funds.FirstOrDefault(x => x.FundId == deposit.ToFund);
+            depositFund.AdjustTotal(deposit);
+
+            _db.Entry(withdrawalFund).State = EntityState.Modified;
+            _db.Transactions.Add(withdrawal);
+
+            _db.Entry(depositFund).State = EntityState.Modified;
+            _db.Transactions.Add(deposit);
+
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Details(int id)
         {
             var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);

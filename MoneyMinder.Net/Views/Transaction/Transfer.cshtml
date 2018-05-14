@@ -1,0 +1,47 @@
+﻿@model MoneyMinder.Net.Models.Transaction
+
+@{
+    ViewData["Title"] = "Transfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transfer Money Between Funds</h2>
+<hr />
+
+<form asp-action="Transfer">
+    <div class="form-horizontal">
+
+        @*<div asp-validation-summary="ModelOnly"></div>*@
+        <div class="form-group">
+
+            <label asp-for="Date" class="col-md-2 control-label"></label>
+            <input asp-for="Date" class="form-control" />
+            <span asp-validation-for="Date"></span>
+
+            @*<label asp-for="Type" class="col-md-2 control-label"></label>
+                <select asp-for="Type" class="form-control">
+                    <option>Deposit</option>
+                    <option>Withdrawal</option>
+                </select>*@
+
+            <label asp-for="Amount" class="col-md-2 control-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount"></span>
+
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description"></span>
+
+            <label asp-for="FromFund" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+            <label asp-for="ToFund" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+        </div>
+        <input type="submit" value="Transfer" class="btn btn-default" />
+    </div>
+</form>
