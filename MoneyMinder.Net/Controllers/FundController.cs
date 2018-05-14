@@ -121,17 +121,17 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult DeleteAll(int id)
-        {
-            return View(_db.Funds.ToList());
-        }
+        //public ActionResult DeleteAll(int id)
+        //{
+        //    return View(_db.Funds.ToList());
+        //}
 
-        [HttpPost, ActionName("DeleteAll")]
-        public IActionResult DeleteAllConfirmed(int id)
-        {
-            _db.Funds.RemoveRange(_db.Funds);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("DeleteAll")]
+        //public IActionResult DeleteAllConfirmed(int id)
+        //{
+        //    _db.Funds.RemoveRange(_db.Funds);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
     }
 }
