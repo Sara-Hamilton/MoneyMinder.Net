@@ -5,21 +5,33 @@
 
 @using MoneyMinder.Net.ViewModels
 
+@using SaraHamilton.ViewModels
+
 @model RegisterViewModel
 
-<h2>Register a new user</h2>
-<hr />
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.LabelFor(user => user.Email)
-    @Html.TextBoxFor(user => user.Email)
-    <p value="message"></p>
+<form asp-action="Register">
+    <div class="form-horizontal">
+        <h3>Register</h3>
+        <hr />
 
-    @Html.LabelFor(user => user.Password)
-    @Html.PasswordFor(user => user.Password)
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
 
-    @Html.LabelFor(user => user.ConfirmPassword)
-    @Html.PasswordFor(user => user.ConfirmPassword)
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
 
-    <input type="submit" value="Register" />
-}
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <span class="col-md-2"></span>
+
+        </div>
+        <input class="btn btn-default" type="submit" value="Register" />
+
+    </div>
+</form>
