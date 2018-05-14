@@ -105,12 +105,22 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Fund fund)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([Bind("Name", "FundId")] FundViewModel model)
         {
-            _db.Entry(fund).State = EntityState.Modified;
-            _db.SaveChanges();
-            //fundRepo.Edit(fund);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var thisFund = _db.Funds.FirstOrDefault(funds => funds.FundId == model.FundId);
+                thisFund.Name = model.Name;
+                _db.Entry(thisFund).State = EntityState.Modified;
+                _db.SaveChanges();
+                //fundRepo.Edit(fund);
+                return RedirectToAction("Index");
+            }
+
+            {
+                return View();
+            }
         }
 
         public ActionResult Delete(int id)
