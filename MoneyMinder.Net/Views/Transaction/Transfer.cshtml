@@ -30,7 +30,7 @@
 
             <label asp-for="FromFund" class="col-md-2 control-label"></label>
             <div class="form-group">
-                <select class="form-control" name="FromFund" class="dropdownlist" id="FromFundId">
+                <select class="form-control dropdownlist" name="FromFund" id="FromFundId">
                     @foreach (SelectListItem fund in ViewBag.FundId)
                     {
                         <option value="@(fund.Value)">@fund.Text</option>
@@ -40,7 +40,7 @@
 
             <label asp-for="ToFund" class="col-md-2 control-label"></label>
             <div class="form-group">
-                <select class="form-control" name="ToFund" class="dropdownlist" id="ToFundId">
+                <select class="form-control dropdownlist" name="ToFund" id="ToFundId">
                     @foreach (SelectListItem fund in ViewBag.FundId)
                     {
                         <option value="@(fund.Value)">@fund.Text</option>

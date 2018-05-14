@@ -119,11 +119,29 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Filter()
         {
-            var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-            return View(thisTransaction);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id), "CategoryId", "Name");
+            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id), "FundId", "Name");
+            return View();
         }
+
+        [HttpPost, ActionName("Filter")]
+        public async Task<IActionResult> FilterConfirmed()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+
+            return RedirectToAction("Index");
+        }
+
+        //public IActionResult Details(int id)
+        //{
+        //    var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
+        //    return View(thisTransaction);
+        //}
 
         //public IActionResult Edit(int id)
         //{

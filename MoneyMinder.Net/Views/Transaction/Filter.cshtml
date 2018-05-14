@@ -1,0 +1,38 @@
+﻿@model MoneyMinder.Net.Models.Transaction
+
+@{
+    ViewData["Title"] = "Transaction - Filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Filter Transactions</h2>
+<hr />
+
+<form asp-action="Filter">
+    <div class="form-horizontal">
+
+        <div class="form-group">
+
+            <label for="FromDate" class="col-md-2 control-label">From Date</label>
+            <input type="date" name="FromDate" class="form-control" />
+
+            <label for="ToDate" class="col-md-2 control-label">To Date</label>
+            <input type="date" name="ToDate" class="form-control" />
+
+            <label for="IncludeFunds" class="col-md-2 control-label">Funds</label>
+               @foreach (SelectListItem fund in ViewBag.FundId)
+               { 
+                <input type="checkbox" name=@fund.Text value=@fund.Value>@fund.Text
+               }
+            <p></p>
+          
+            <label for="IncludeCategories" class="col-md-2 control-label">Categories</label>
+            @foreach (SelectListItem category in ViewBag.CategoryId)
+            {
+                <input type="checkbox" name=@category.Text value=@category.Value>@category.Text
+            }
+
+           </div>
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
