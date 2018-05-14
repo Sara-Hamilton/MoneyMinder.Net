@@ -36,6 +36,18 @@ textarea {
     }
 }
 
-body {
-    background-color: lightblue;
+body, th {
+    background-color: #0C2A3D;
+    color: aliceblue;
+}
+
+.table , .panel{
+    background: aliceblue;
+    color: #404040;
+}
+
+label {
+    color: #909090;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
 }

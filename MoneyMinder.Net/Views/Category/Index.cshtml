@@ -11,7 +11,7 @@
 @if (Model.Any())
 {
 
-    <table class="table">
+    @*<table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -31,7 +31,21 @@
                 </td>
             </tr>
         }
-    </table>
+    </table>*@
+
+    @foreach (var listCategory in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-4">@Html.DisplayFor(modelCategory => listCategory.Name)</div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @Html.ActionLink("Edit", "Edit", new { id = listCategory.CategoryId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = listCategory.CategoryId })
+                </div>
+            </div>
+        </div>
+    }
 }
 else
 {

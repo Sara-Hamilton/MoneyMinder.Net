@@ -4,6 +4,7 @@
     ViewData["Title"] = "Transaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="row">
     <div class="col-md-6">
         <h2>@User.Identity.Name's transactions in @ViewBag.FundName fund</h2>
@@ -14,35 +15,33 @@
     </div>
 </div>
 
+<p>
+    @Html.ActionLink("Create New Transaction", "Create", "Transaction")
+</p>
 
-    <table class="table table-bordered">
-        <tr>
-            <th class="col-md-1">Date</th>
-            <th class="col-md-1">Type</th>
-            <th class="col-md-4">Description</th>
-            <th class="col-md-2">Fund</th>
-            <th class="col-md-2">Category</th>
-            <th class="col-md-2">Transaction Amount</th>
+<table class="table">
+    <tr>
+        <th class="col-md-1">Date</th>
+        <th class="col-md-1">Type</th>
+        <th class="col-md-4">Description</th>
+        <th class="col-md-2">Fund</th>
+        <th class="col-md-2">Category</th>
+        <th class="col-md-2">Transaction Amount</th>
+    </tr>
+
+    @foreach (var listTransaction in Model)
+    {
+        <tr class="list-group">
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Date)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Type)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Description)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Fund.Name)</td>
+            <td>@Html.DisplayFor(modelTransaction => listTransaction.Category.Name)</td>
+            <td>@if (listTransaction.Amount < 0)
+                {
+                    <span>-</span>listTransaction.Amount = listTransaction.Amount * -1;
+                }
+                <span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
         </tr>
-
-        @foreach (var listTransaction in Model)
-        {
-            <tr class="list-group">
-                <td>@Html.DisplayFor(modelTransaction => listTransaction.Date)</td>
-                <td>@Html.DisplayFor(modelTransaction => listTransaction.Type)</td>
-                <td>@Html.DisplayFor(modelTransaction => listTransaction.Description)</td>
-                <td>@Html.DisplayFor(modelTransaction => listTransaction.Fund.Name)</td>
-                <td>@Html.DisplayFor(modelTransaction => listTransaction.Category.Name)</td>
-                <td>@if (listTransaction.Amount < 0)
-                    {
-                        <span>-</span>listTransaction.Amount = listTransaction.Amount * -1;
-                    }
-                    <span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
-            </tr>
-        }
-    </table>
-
-    <p>
-        @Html.ActionLink("Create New Transaction", "Create", "Transaction")
-    </p>
-
+    }
+</table>

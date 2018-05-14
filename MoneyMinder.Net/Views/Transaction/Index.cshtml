@@ -31,7 +31,7 @@
 
 @if (ViewBag.Funds != 0 && ViewBag.Categories != 0)
 {
-    <table class="table table-bordered">
+    <table class="table">
         <tr>
             <th class="col-md-1">Date</th>
             <th class="col-md-1">Type</th>
@@ -49,11 +49,13 @@
                 <td>@Html.DisplayFor(modelTransaction => listTransaction.Description)</td>
                 <td>@Html.DisplayFor(modelTransaction => listTransaction.Fund.Name)</td>
                 <td>@Html.DisplayFor(modelTransaction => listTransaction.Category.Name)</td>
-                <td>@if (listTransaction.Amount < 0)
+                <td>
+                    @if (listTransaction.Amount < 0)
                     {
                         <span>-</span>listTransaction.Amount = listTransaction.Amount * -1;
                     }
-                    <span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)</td>
+                    <span>$</span>@Html.DisplayFor(modelTransaction => listTransaction.Amount)
+                </td>
             </tr>
         }
     </table>

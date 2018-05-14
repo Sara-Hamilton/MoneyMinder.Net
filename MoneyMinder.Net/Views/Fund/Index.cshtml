@@ -19,7 +19,7 @@
 @if (Model.Any())
 {
 
-    <table class="table">
+    @*<table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -32,28 +32,37 @@
 
         @foreach (var listFund in Model)
         {
-        <tr>
-            <td>
-                @Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })
-            </td>
-            <td>
-                $@Html.DisplayFor(modelFund => listFund.Total)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-            </td>
-        </tr>
-        //<div class="row">
-            //<div class="well-lg">
-                //<div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
-                //<div class="col-md-4">$@Html.DisplayFor(modelFund => listFund.Total)</div>
-            //</div>
-        //</div>
+            <tr>
+                <td>
+                    @Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelFund => listFund.Total)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                </td>
+            </tr>
         }
-    </table>
-}
-else
-{
+    </table>*@
+
+        @foreach (var listFund in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
+                    <div class="col-md-4">$@Html.DisplayFor(modelFund => listFund.Total)</div>
+                    <div class="col-md-4">
+                        @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                                </div>
+                </div>
+             </div>
+        }
+
+    }
+    else
+    {
     <p>No funds have been added yet!</p>
-}
+    }
