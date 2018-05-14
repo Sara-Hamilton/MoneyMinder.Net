@@ -164,6 +164,9 @@ namespace MoneyMinder.Net.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -205,7 +208,7 @@ namespace MoneyMinder.Net.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<decimal?>("Total");
+                    b.Property<decimal>("Total");
 
                     b.Property<string>("UserId");
 
@@ -221,7 +224,7 @@ namespace MoneyMinder.Net.Migrations
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal?>("Amount");
+                    b.Property<decimal>("Amount");
 
                     b.Property<int>("CategoryId");
 
@@ -229,9 +232,13 @@ namespace MoneyMinder.Net.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("FromFund");
+
                     b.Property<int>("FundId");
 
-                    b.Property<decimal?>("PreviousTotal");
+                    b.Property<decimal>("PreviousTotal");
+
+                    b.Property<int>("ToFund");
 
                     b.Property<string>("Type");
 

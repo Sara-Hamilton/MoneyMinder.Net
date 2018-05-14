@@ -17,7 +17,6 @@ namespace MoneyMinder.Net.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
-        [Required]
         [DataType(DataType.Currency)]
         [Range(0.01, 100000, ErrorMessage = "Price must be between $0.01 and $100,000")]
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]

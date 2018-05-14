@@ -19,10 +19,10 @@
             <span asp-validation-for="Date"></span>
 
             @*<label asp-for="Type" class="col-md-2 control-label"></label>
-                <select asp-for="Type" class="form-control">
-                    <option>Deposit</option>
-                    <option>Withdrawal</option>
-                </select>*@
+        <select asp-for="Type" class="form-control">
+            <option>Deposit</option>
+            <option>Withdrawal</option>
+        </select>*@
 
             <label asp-for="Amount" class="col-md-2 control-label"></label>
             <input asp-for="Amount" class="form-control" />
@@ -32,11 +32,32 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description"></span>
 
+
             <label asp-for="FromFund" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            <div class="form-group">
+                <select class="form-control" name="FromFund" class="dropdownlist" id="FromFundId">
+                    @foreach (SelectListItem fund in ViewBag.FundId)
+                    {
+                        <option value="@(fund.Value)">@fund.Text</option>
+                    }
+                </select>
+            </div>
 
             <label asp-for="ToFund" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            <div class="form-group">
+                <select class="form-control" name="ToFund" class="dropdownlist" id="ToFundId">
+                    @foreach (SelectListItem fund in ViewBag.FundId)
+                    {
+                        <option value="@(fund.Value)">@fund.Text</option>
+                    }
+                </select>
+            </div>
+
+            @*<label asp-for="FromFund" id="FromFund" name="FromFund" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control", @name = "FromFund" })
+
+            <label asp-for="ToFund" class="col-md-2 control-label"></label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control", @name = "ToFund" })*@
 
             <label asp-for="CategoryId" class="col-md-2 control-label"></label>
             @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })

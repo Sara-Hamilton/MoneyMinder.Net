@@ -8,9 +8,10 @@ using MoneyMinder.Net.Tests.Models;
 namespace MoneyMinder.Net.Migrations.TestDb
 {
     [DbContext(typeof(TestDbContext))]
-    partial class TestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180514202949_AddToAndFromFundsToTransactionModel")]
+    partial class AddToAndFromFundsToTransactionModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
