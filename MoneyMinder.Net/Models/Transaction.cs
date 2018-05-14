@@ -19,10 +19,11 @@ namespace MoneyMinder.Net.Models
         public DateTime Date { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [Range(0.01, 100000, ErrorMessage = "Price must be between $0.01 and $100,000")]
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal Amount { get; set; }
         [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal PreviousTotal { get; set; } = 0;
 
         public int CategoryId { get; set; }
