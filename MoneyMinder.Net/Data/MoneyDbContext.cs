@@ -45,6 +45,9 @@ namespace MoneyMinder.Net.Data
             builder.Entity<IdentityRole>(entity => {
                 entity.Property(m => m.Name).HasMaxLength(127); entity.Property(m => m.NormalizedName).HasMaxLength(127);
             });
+            builder.Entity<ApplicationUser>()
+            .HasIndex(m => new { m.Email })
+            .IsUnique(true);
         }
 
     }
