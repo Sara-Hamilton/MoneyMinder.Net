@@ -6,15 +6,28 @@
 
 @model LoginViewModel
 
-<h2>Log in with your account</h2>
-<hr />
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
+<form asp-action="Login">
+    <div class="form-horizontal">
+        <h3>Login</h3>
+        <hr />
 
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
 
-    <input type="submit" value="Log in" class="btn btn-default" />
-}
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <span class="col-md-2"></span>
+
+
+        </div>
+        <input class="btn btn-default" type="submit" value="Log in" />
+
+    </div>
+</form>
+
+<p>@Html.ActionLink("Register for an account", "Register")</p>
