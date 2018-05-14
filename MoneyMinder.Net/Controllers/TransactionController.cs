@@ -78,8 +78,8 @@ namespace MoneyMinder.Net.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Transfer(int FromFund, int ToFund)
+        [HttpPost, ActionName("Transfer")]
+        public async Task<IActionResult> TransferConfirmed()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
@@ -105,7 +105,7 @@ namespace MoneyMinder.Net.Controllers
             deposit.FundId = int.Parse(Request.Form["ToFund"]);
             deposit.User = currentUser;
 
-            var depositFund = _db.Funds.FirstOrDefault(x => x.FundId == ToFund);
+            var depositFund = _db.Funds.FirstOrDefault(x => x.FundId == deposit.FundId);
             depositFund.AdjustTotal(deposit);
 
             _db.Entry(withdrawalFund).State = EntityState.Modified;
