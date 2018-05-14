@@ -10,6 +10,7 @@ using MoneyMinder.Net.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using MoneyMinder.Net.ViewModels;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -61,15 +62,25 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Category category)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name")] CategoryViewModel model)
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            category.User = currentUser;
-            //categoryRepo.Save(category);
-            _db.Categories.Add(category);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var currentUser = await _userManager.FindByIdAsync(userId);
+                Category newCategory = new Category();
+                newCategory.User = currentUser;
+                newCategory.Name = model.Name;
+                //categoryRepo.Save(category);
+                _db.Categories.Add(newCategory);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            {
+                return View();
+            }
         }
 
         //public IActionResult Details(int id)
