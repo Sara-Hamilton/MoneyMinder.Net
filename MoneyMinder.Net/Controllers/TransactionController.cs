@@ -43,9 +43,17 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+            
             ViewBag.Categories = (_db.Categories.Where(x => x.User.Id == currentUser.Id)).Count();
             ViewBag.Funds = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id)).Count();
-            return View(_db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id));
+            var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id);
+            List<decimal> userTotal = new List<decimal> { };
+            foreach (Transaction transaction in transactionsList)
+            {
+                    userTotal.Add(transaction.Amount);
+            }
+            ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
+            return View(transactionsList);
             //return View(transactionRepo.Transactions.ToList());
         }
 
@@ -65,6 +73,10 @@ namespace MoneyMinder.Net.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             transaction.User = currentUser;
             //transactionRepo.Save(transaction);
+            if(transaction.Type =="Withdrawal")
+            {
+                transaction.Amount = -transaction.Amount;
+            }
             var currentFund = _db.Funds.FirstOrDefault(x => x.FundId == transaction.FundId);
             currentFund.AdjustTotal(transaction);
             _db.Entry(currentFund).State = EntityState.Modified;

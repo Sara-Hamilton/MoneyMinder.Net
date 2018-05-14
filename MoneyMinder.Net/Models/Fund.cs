@@ -51,16 +51,17 @@ namespace MoneyMinder.Net.Models
 
         public void AdjustTotal(Transaction transaction)
         {
-            decimal newTotal = 0m;
-            if (transaction.Type == "Deposit")
-            {
-                newTotal = this.Total += transaction.Amount;
-            }
-            if (transaction.Type == "Withdrawal")
-            {
-                newTotal = this.Total -= transaction.Amount;
-            }
-            this.Total = newTotal;
+            //decimal newTotal = 0m;
+            //if (transaction.Type == "Deposit")
+            //{
+            //    newTotal = this.Total += transaction.Amount;
+            //}
+            //if (transaction.Type == "Withdrawal")
+            //{
+            //    newTotal = this.Total -= transaction.Amount;
+            //}
+            //this.Total = newTotal;
+            this.Total = this.Total += transaction.Amount;
         }
     }
 }

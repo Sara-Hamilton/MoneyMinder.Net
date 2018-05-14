@@ -6,6 +6,8 @@
 }
 <h2>@User.Identity.Name's Categories</h2>
 
+<p>@Html.ActionLink("Create New Category", "Create", "Category")</p>
+
 @if (Model.Any())
 {
 
@@ -35,7 +37,3 @@ else
 {
     <p>No categories have been added yet!</p>
 }
-
-<p>
-    @Html.ActionLink("Create New Category", "Create", "Category")
-</p>

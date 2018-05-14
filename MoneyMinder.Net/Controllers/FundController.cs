@@ -79,7 +79,7 @@ namespace MoneyMinder.Net.Controllers
 
         public IActionResult Details(int id)
         {
-            //var thisFund = _db.Funds.FirstOrDefault(funds => funds.FundId == id);
+            ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == id).Name;
             ViewBag.FundTotal = _db.Funds.FirstOrDefault(funds => funds.FundId == id).Total.ToString("0.00");
             return View(_db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(transactions => transactions.FundId == id));
             //var theseTransactions = _db.Transactions.Where(transactions => transactions.FundId == id); 
