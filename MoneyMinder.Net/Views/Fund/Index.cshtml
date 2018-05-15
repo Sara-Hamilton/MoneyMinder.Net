@@ -23,13 +23,15 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
-                    <div class="col-md-4">@Html.DisplayFor(modelFund => listFund.Total)</div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">@Html.DisplayFor(modelFund => listFund.Total)</div>
+                    @*<div class="col-md-2">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
+                    <div class="col-md-2">@Html.DisplayFor(modelFund => listFund.Goal)</div>*@
+                    <div class="col-md-2">
                         @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
                         @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
-                        {
-                             <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-                        }
+        {
+                <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+}
                     </div>
                 </div>
              </div>
