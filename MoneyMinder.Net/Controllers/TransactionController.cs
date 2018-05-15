@@ -135,26 +135,47 @@ namespace MoneyMinder.Net.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             var FromDate = DateTime.Parse(Request.Form["FromDate"]);
             var ToDate = DateTime.Parse(Request.Form["ToDate"]);
-            //if(Request.Form["FundId"] == "")
-            //{
-            //    var FundId = 0;
-            //}
-            //else
-            //{
-            //var FundId = int.Parse(Request.Form["FundId"]);
-            //}
-            //if (Request.Form["CategoryId"] == "")
-            //{
-            //    var CategoryId = 0;
-            //}
-            //else
-            //{
-            //var CategoryId = int.Parse(Request.Form["CategoryId"]);
-            //}
-                
+            var FormFundId = 0;
+            var FormCategoryId = 0;
+          
+            if (Request.Form["FundId"] != "")
+            {
+                FormFundId = int.Parse(Request.Form["FundId"]);
+            }
+            if (Request.Form["CategoryId"] != "")
+            {
+                FormCategoryId = int.Parse(Request.Form["CategoryId"]);
+            }
 
-            //List<Transaction> filteredTransactions = new List<Transaction> { };
             var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).OrderByDescending(x => x.TransactionId);
+
+            if(FormFundId != 0 && FormCategoryId == 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).OrderByDescending(x => x.TransactionId);
+            }
+            else if (FormFundId == 0 && FormCategoryId != 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
+            }
+            else if (FormFundId != 0 && FormCategoryId != 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
+            }
+            //else
+            //{
+            //    var FormCategoryId = int.Parse(Request.Form["CategoryId"]);
+            //}
+
+            //var filteredFunds = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(x => x.FundId == FormFundId);
+
+            //var filteredCategories = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(x => x.CategoryId == FormCategoryId);
+            //List<Transaction> filteredTransactions = new List<Transaction> { };
+
+            //var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate && (FormFundId == 0 || transaction.FundId == FormFundId) && (FormCategoryId == 0 || transaction.CategoryId = FormCategoryId)).OrderByDescending(x => x.TransactionId);
+
+            //var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId != 0).OrderByDescending(x => x.TransactionId);
+
+
             //ViewBag.filteredTransactions = new SelectList(filteredTransactions, "filteredTransactions", "Name");
             //var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).OrderByDescending(x => x.TransactionId);
 
