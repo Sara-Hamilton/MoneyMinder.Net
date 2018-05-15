@@ -56,7 +56,7 @@ namespace MoneyMinder.Net.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")] FundViewModel model)
+        public async Task<IActionResult> Create([Bind("Name", "Minimum", "Goal")] FundViewModel model)
         {
             if(ModelState.IsValid)
             {
@@ -65,7 +65,9 @@ namespace MoneyMinder.Net.Controllers
                 Fund newFund = new Fund
                 {
                     User = currentUser,
-                    Name = model.Name
+                    Name = model.Name,
+                    Minimum = model.Minimum,
+                    Goal = model.Goal
                 };
                 _db.Funds.Add(newFund);
                 _db.SaveChanges();
