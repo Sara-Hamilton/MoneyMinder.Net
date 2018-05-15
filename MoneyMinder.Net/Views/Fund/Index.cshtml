@@ -41,6 +41,8 @@ else
     <p>No funds have been added yet!</p>
 }
 
+@*var listData = JSON.parse('@Html.Raw(HttpUtility.HtmlDecode(ViewBag.fundNames))');*@
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 <center>
@@ -51,6 +53,8 @@ else
 
 <canvas id="myChart" width="100" height="100"></canvas>
 <script>
+
+    @*var nameArray = @Html.Raw(Json.Encode(ViewBag.fundNames))*@
     var ctx = document.getElementById("myChart").getContext("2d");
     ctx.canvas.width = 200;
     ctx.canvas.height = 200;
@@ -58,11 +62,11 @@ else
         type: 'pie',
         data: {
             labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            //labels: @ViewBag.fundNames,
+            //labels: @Html.Raw(ViewBag.fundNames),
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
-                //data: @ViewBag.fundTotals,
+                //data: @Html.Raw(ViewBag.fundTotals),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.4)',
                     'rgba(54, 162, 235, 0.4)',

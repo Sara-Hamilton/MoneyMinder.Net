@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using MoneyMinder.Net.ViewModels;
 using System.Collections;
 
+
 namespace MoneyMinder.Net.Controllers
 {
     [Authorize]
@@ -40,19 +41,19 @@ namespace MoneyMinder.Net.Controllers
             }
             ViewBag.UserTransactionIds = userTransactionIds;
 
-            ArrayList fundNames = new ArrayList();
-            ArrayList fundTotals = new ArrayList();
+            List<string> fundNames = new List<string>();
+            List<int> fundTotals = new List<int>();
 
             var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Fund fund in fundsList)
             {
                 fundNames.Add(fund.Name);
-                fundTotals.Add(fund.Total);
+                fundTotals.Add(System.Decimal.ToInt32(fund.Total));
                 userTotal.Add(fund.Total);
             }
-            ViewBag.fundNames = fundNames;
-            ViewBag.fundTotals = fundTotals;
+            ViewBag.fundNames = fundNames.ToList();
+            ViewBag.fundTotals = fundTotals.ToList();
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
             return View(fundsList);
         }
