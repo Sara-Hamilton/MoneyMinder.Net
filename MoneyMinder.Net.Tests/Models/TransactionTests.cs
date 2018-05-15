@@ -13,11 +13,15 @@ namespace MoneyMinder.Net.Tests.Models
         public void TransactionEquals_TransactionsWithSameIdAreEqual_True()
         {
             //Arrange 
-            var transaction1 = new Transaction();
-            transaction1.TransactionId = 1;
+            var transaction1 = new Transaction
+            {
+                TransactionId = 1
+            };
 
-            var transaction2 = new Transaction();
-            transaction2.TransactionId = 1;
+            var transaction2 = new Transaction
+            {
+                TransactionId = 1
+            };
 
             //Act
 
