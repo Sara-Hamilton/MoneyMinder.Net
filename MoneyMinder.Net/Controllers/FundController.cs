@@ -62,9 +62,11 @@ namespace MoneyMinder.Net.Controllers
             {
                 var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var currentUser = await _userManager.FindByIdAsync(userId);
-                Fund newFund = new Fund();
-                newFund.User = currentUser;
-                newFund.Name = model.Name;
+                Fund newFund = new Fund
+                {
+                    User = currentUser,
+                    Name = model.Name
+                };
                 _db.Funds.Add(newFund);
                 _db.SaveChanges();
                 return RedirectToAction("Index");

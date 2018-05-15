@@ -84,26 +84,30 @@ namespace MoneyMinder.Net.Controllers
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
 
-            Transaction withdrawal = new Transaction();
-            withdrawal.Type = "Withdrawal";
-            withdrawal.Date = DateTime.Parse(Request.Form["Date"]);
-            withdrawal.Amount = -(Decimal.Parse(Request.Form["Amount"]));
-            withdrawal.Description = Request.Form["Description"];
-            withdrawal.CategoryId = int.Parse(Request.Form["CategoryId"]);
-            withdrawal.FundId = int.Parse(Request.Form["FromFund"]);
-            withdrawal.User = currentUser;
+            Transaction withdrawal = new Transaction
+            {
+                Type = "Withdrawal",
+                Date = DateTime.Parse(Request.Form["Date"]),
+                Amount = -(Decimal.Parse(Request.Form["Amount"])),
+                Description = Request.Form["Description"],
+                CategoryId = int.Parse(Request.Form["CategoryId"]),
+                FundId = int.Parse(Request.Form["FromFund"]),
+                User = currentUser
+            };
 
             var withdrawalFund = _db.Funds.FirstOrDefault(x => x.FundId == withdrawal.FundId);
             withdrawalFund.AdjustTotal(withdrawal);
 
-            Transaction deposit = new Transaction();
-            deposit.Type = "Deposit";
-            deposit.Date = DateTime.Parse(Request.Form["Date"]);
-            deposit.Amount = Decimal.Parse(Request.Form["Amount"]);
-            deposit.Description = Request.Form["Description"];
-            deposit.CategoryId = int.Parse(Request.Form["CategoryId"]);
-            deposit.FundId = int.Parse(Request.Form["ToFund"]);
-            deposit.User = currentUser;
+            Transaction deposit = new Transaction
+            {
+                Type = "Deposit",
+                Date = DateTime.Parse(Request.Form["Date"]),
+                Amount = Decimal.Parse(Request.Form["Amount"]),
+                Description = Request.Form["Description"],
+                CategoryId = int.Parse(Request.Form["CategoryId"]),
+                FundId = int.Parse(Request.Form["ToFund"]),
+                User = currentUser
+            };
 
             var depositFund = _db.Funds.FirstOrDefault(x => x.FundId == deposit.FundId);
             depositFund.AdjustTotal(deposit);
