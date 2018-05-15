@@ -129,12 +129,36 @@ namespace MoneyMinder.Net.Controllers
         }
 
         [HttpPost, ActionName("Filter")]
-        public async Task<IActionResult> FilterConfirmed()
+        public async Task<IActionResult> FilteredView()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+            var FromDate = DateTime.Parse(Request.Form["FromDate"]);
+            var ToDate = DateTime.Parse(Request.Form["ToDate"]);
+            //if(Request.Form["FundId"] == "")
+            //{
+            //    var FundId = 0;
+            //}
+            //else
+            //{
+            //var FundId = int.Parse(Request.Form["FundId"]);
+            //}
+            //if (Request.Form["CategoryId"] == "")
+            //{
+            //    var CategoryId = 0;
+            //}
+            //else
+            //{
+            //var CategoryId = int.Parse(Request.Form["CategoryId"]);
+            //}
+                
 
-            return RedirectToAction("Index");
+            //List<Transaction> filteredTransactions = new List<Transaction> { };
+            var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).OrderByDescending(x => x.TransactionId);
+            //ViewBag.filteredTransactions = new SelectList(filteredTransactions, "filteredTransactions", "Name");
+            //var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).OrderByDescending(x => x.TransactionId);
+
+            return View("FilteredView", filteredTransactions);
         }
 
         //public IActionResult Details(int id)
