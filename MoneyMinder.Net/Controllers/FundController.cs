@@ -94,7 +94,7 @@ namespace MoneyMinder.Net.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name", "FundId")] FundViewModel model)
+        public IActionResult Edit([Bind("Name", "FundId", "Minimum", "Goal")] FundViewModel model)
         {
             if (ModelState.IsValid)
             {
