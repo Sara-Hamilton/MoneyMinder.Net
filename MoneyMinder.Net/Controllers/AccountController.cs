@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using MoneyMinder.Net.Models;
 using MoneyMinder.Net.Data;
 using MoneyMinder.Net.ViewModels;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -78,6 +80,26 @@ namespace MoneyMinder.Net.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Hide()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            currentUser.ShowMinAndGoal = true;
+            _db.Entry(currentUser).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Fund");
+        }
+
+        public async Task<IActionResult> Show()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            currentUser.ShowMinAndGoal = false;
+            _db.Entry(currentUser).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Fund");
         }
     }
 }

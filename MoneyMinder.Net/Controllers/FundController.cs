@@ -52,6 +52,7 @@ namespace MoneyMinder.Net.Controllers
                 fundTotals.Add(Convert.ToInt32(fund.Total));
                 userTotal.Add(fund.Total);
             }
+            ViewBag.currentUser = currentUser;
             ViewBag.fundNames = fundNames.ToArray();
             ViewBag.fundTotals = fundTotals.ToArray();
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");

@@ -16,31 +16,55 @@
 </div>
 
 <p>@Html.ActionLink("Create New Fund", "Create", "Fund")</p>
+@if (!ViewBag.currentUser.ShowMinAndGoal)
+{
+    <p>@Html.ActionLink("Hide Min and Goal", "Hide", "Account")</p>
+}
+@if (ViewBag.currentUser.ShowMinAndGoal)
+{
+    <p>@Html.ActionLink("Show Min and Goal", "Show", "Account")</p>
+}
+
 
 @if (Model.Any())
 {
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-2">Minimum</div>
-    <div class="col-md-2">Goal</div>
-    <div class="col-md-2">Balance</div>
-    <div class="col-md-2"></div>
-</div>
-    <br/>
+    <div class="row">
+        <div class="col-md-4"></div>
+        @if (!ViewBag.currentUser.ShowMinAndGoal)
+        {
+            <div class="col-md-2">Minimum</div>
+            <div class="col-md-2">Goal</div>
+        }
+        @if (ViewBag.currentUser.ShowMinAndGoal)
+        {
+            <div class="col-md-4"></div>
+        }
+        <div class="col-md-2">Balance</div>
+        <div class="col-md-2"></div>
+    </div>
+    <br />
     @foreach (var listFund in Model)
     {
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
-                <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "text-danger bold" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
-                <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "text-success bold" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
+                @if (!ViewBag.currentUser.ShowMinAndGoal)
+                {
+                    <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "text-danger bold" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
+                    <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "text-success bold" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
+                }
+                @if(ViewBag.currentUser.ShowMinAndGoal)
+                {
+                    <div class="col-md-4"></div>
+                }
+
                 <div class="col-md-2"><b>@Html.DisplayFor(modelFund => listFund.Total)</b></div>
                 <div class="col-md-2">
                     @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
                     @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
-        {
-            <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-}
+                {
+                    <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                }
                 </div>
             </div>
         </div>
