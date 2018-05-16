@@ -8,9 +8,10 @@ using MoneyMinder.Net.Data;
 namespace MoneyMinder.Net.Migrations
 {
     [DbContext(typeof(MoneyDbContext))]
-    partial class MoneyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180516225135_AddShowMinAndGoalToFundModel")]
+    partial class AddShowMinAndGoalToFundModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");

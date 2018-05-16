@@ -3,14 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MoneyMinder.Net.Data;
+using MoneyMinder.Net.Tests.Models;
 
-namespace MoneyMinder.Net.Migrations
+namespace MoneyMinder.Net.Migrations.TestDb
 {
-    [DbContext(typeof(MoneyDbContext))]
-    partial class MoneyDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TestDbContext))]
+    [Migration("20180516225150_AddShowMinAndGoalToFundModel")]
+    partial class AddShowMinAndGoalToFundModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -261,37 +262,32 @@ namespace MoneyMinder.Net.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany("Claims")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("MoneyMinder.Net.Models.ApplicationUser")
                         .WithMany("Claims")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("MoneyMinder.Net.Models.ApplicationUser")
                         .WithMany("Logins")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RoleId");
 
                     b.HasOne("MoneyMinder.Net.Models.ApplicationUser")
                         .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MoneyMinder.Net.Models.Category", b =>
@@ -316,13 +312,11 @@ namespace MoneyMinder.Net.Migrations
                 {
                     b.HasOne("MoneyMinder.Net.Models.Category", "Category")
                         .WithMany("Transactions")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("MoneyMinder.Net.Models.Fund", "Fund")
                         .WithMany()
-                        .HasForeignKey("FundId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("FundId");
 
                     b.HasOne("MoneyMinder.Net.Models.ApplicationUser", "User")
                         .WithMany()

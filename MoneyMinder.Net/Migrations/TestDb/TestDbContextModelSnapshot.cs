@@ -208,6 +208,8 @@ namespace MoneyMinder.Net.Migrations.TestDb
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("ShowMinAndGoal");
+
                     b.Property<decimal>("Total");
 
                     b.Property<string>("UserId");
