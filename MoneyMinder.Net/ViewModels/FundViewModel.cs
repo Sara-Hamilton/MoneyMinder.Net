@@ -21,7 +21,5 @@ namespace MoneyMinder.Net.ViewModels
 
         [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal? Goal { get; set; }
-
-        public bool ShowMinAndGoal { get; set; }
     }
 }
