@@ -36,8 +36,8 @@
 
 
 
-                <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "alert alert-danger" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
-                <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "alert alert-success" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
+                <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "text-danger bold" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
+                <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "text-success bold" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
                 <div class="col-md-2">
                     @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
                     @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
@@ -47,14 +47,6 @@
                 </div>
             </div>
         </div>
-
-              
-                @*<div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                         aria-valuemin="0" aria-valuemax="100" style="width: @(listFund.Total / listFund.Goal) * 100)%">
-                        70% @(listFund.Total/listFund.Goal)*100)
-                    </div>
-                </div>*@
     }
 
 }
