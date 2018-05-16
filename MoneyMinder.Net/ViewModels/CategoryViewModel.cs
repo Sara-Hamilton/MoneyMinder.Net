@@ -13,6 +13,7 @@ namespace MoneyMinder.Net.ViewModels
         public string Name { get; set; }
 
         [Key]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
     }
 }

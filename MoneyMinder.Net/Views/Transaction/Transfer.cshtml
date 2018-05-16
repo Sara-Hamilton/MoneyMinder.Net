@@ -25,10 +25,10 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description"></span>
 
-            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+            <label asp-for="CategoryId" class="col-md-2 control-label">Category</label>
             @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
-            <label asp-for="FromFund" class="col-md-2 control-label"></label>
+            <label asp-for="FromFund" class="col-md-2 control-label">Fund</label>
             <div class="form-group">
                 <select class="form-control dropdownlist" name="FromFund" id="FromFundId">
                     @foreach (SelectListItem fund in ViewBag.FundId)

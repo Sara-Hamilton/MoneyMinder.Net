@@ -13,6 +13,7 @@ namespace MoneyMinder.Net.ViewModels
         public string Name { get; set; }
 
         [Key]
+        [Display(Name = "Fund")]
         public int FundId { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:c}}", ApplyFormatInEditMode = true)]
