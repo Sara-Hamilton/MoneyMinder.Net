@@ -155,12 +155,12 @@ namespace MoneyMinder.Net.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<bool>("ShowMinAndGoal");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(127);
-
-                    b.Property<decimal?>("UserTotal");
 
                     b.HasKey("Id");
 
@@ -207,8 +207,6 @@ namespace MoneyMinder.Net.Migrations
                     b.Property<decimal?>("Minimum");
 
                     b.Property<string>("Name");
-
-                    b.Property<bool>("ShowMinAndGoal");
 
                     b.Property<decimal>("Total");
 
