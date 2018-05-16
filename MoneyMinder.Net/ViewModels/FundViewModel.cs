@@ -16,10 +16,12 @@ namespace MoneyMinder.Net.ViewModels
         [Display(Name = "Fund")]
         public int FundId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:c}}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}}")]
         public decimal? Minimum { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal? Goal { get; set; }
+
+        public bool ShowMinAndGoal { get; set; }
     }
 }

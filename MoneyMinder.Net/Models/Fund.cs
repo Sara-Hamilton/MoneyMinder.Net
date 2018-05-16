@@ -19,6 +19,7 @@ namespace MoneyMinder.Net.Models
         public decimal? Minimum { get; set; }
         [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal? Goal { get; set; }
+        public bool ShowMinAndGoal { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ApplicationUser User { get; set; }
