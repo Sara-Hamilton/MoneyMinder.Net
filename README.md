@@ -26,7 +26,7 @@ This is my capstone project for Epicodus.  Its purpose is to display understandi
     * CategoryId
     * Name
 
-  *Transaction 
+  * Transaction 
 	* TransactionId
 	* Date
 	* Description
