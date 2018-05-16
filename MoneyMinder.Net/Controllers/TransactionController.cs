@@ -168,8 +168,6 @@ namespace MoneyMinder.Net.Controllers
                 filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
             }
 
-            ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == FormFundId).Name;
-
             List<decimal> userTotal = new List<decimal> { };
             foreach (Transaction transaction in filteredTransactions)
             {

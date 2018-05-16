@@ -55,9 +55,11 @@ namespace MoneyMinder.Net.Controllers
             {
                 var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var currentUser = await _userManager.FindByIdAsync(userId);
-                Category newCategory = new Category();
-                newCategory.User = currentUser;
-                newCategory.Name = model.Name;
+                Category newCategory = new Category
+                {
+                    User = currentUser,
+                    Name = model.Name
+                };
                 _db.Categories.Add(newCategory);
                 _db.SaveChanges();
                 return RedirectToAction("Index");

@@ -14,5 +14,11 @@ namespace MoneyMinder.Net.ViewModels
 
         [Key]
         public int FundId { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:c}}", ApplyFormatInEditMode = true)]
+        public decimal? Minimum { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
+        public decimal? Goal { get; set; }
     }
 }

@@ -12,11 +12,15 @@ namespace MoneyMinder.Net.Tests
         public void CategoryEquals_CategoriesWithSameIdAreEqual_True()
         {
             //Arrange 
-            var category1 = new Category();
-            category1.CategoryId = 1;
+            var category1 = new Category
+            {
+                CategoryId = 1
+            };
 
-            var category2 = new Category();
-            category2.CategoryId = 1;
+            var category2 = new Category
+            {
+                CategoryId = 1
+            };
 
             //Act
 
