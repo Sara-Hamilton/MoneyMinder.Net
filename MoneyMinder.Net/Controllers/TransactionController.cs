@@ -145,10 +145,12 @@ namespace MoneyMinder.Net.Controllers
             if (Request.Form["FundId"] != "")
             {
                 FormFundId = int.Parse(Request.Form["FundId"]);
+                ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == FormFundId).Name;
             }
             if (Request.Form["CategoryId"] != "")
             {
                 FormCategoryId = int.Parse(Request.Form["CategoryId"]);
+                ViewBag.CategoryName = _db.Categories.FirstOrDefault(categories => categories.CategoryId == FormCategoryId).Name;
             }
 
             var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).OrderByDescending(x => x.TransactionId);
@@ -166,8 +168,6 @@ namespace MoneyMinder.Net.Controllers
                 filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
             }
 
-            ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == FormFundId).Name;
-
             List<decimal> userTotal = new List<decimal> { };
             foreach (Transaction transaction in filteredTransactions)
             {
@@ -179,8 +179,6 @@ namespace MoneyMinder.Net.Controllers
             ViewBag.ToDate = ToDate;
             ViewBag.FormFundId = FormFundId;
             ViewBag.FormCategoryId = FormCategoryId;
-            ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == FormFundId).Name;
-            ViewBag.CategoryName = _db.Categories.FirstOrDefault(categories => categories.CategoryId == FormCategoryId).Name;
 
             return View("FilteredView", filteredTransactions);
         }
