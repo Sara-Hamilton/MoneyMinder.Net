@@ -41,7 +41,6 @@ else
     <p>No funds have been added yet!</p>
 }
 
-@*var listData = JSON.parse('@Html.Raw(HttpUtility.HtmlDecode(ViewBag.fundNames))');*@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
@@ -51,49 +50,65 @@ else
     </div>
 </center>
 
-<canvas id="myChart" width="100" height="100"></canvas>
-<script>
+<script type="text/javascript">
 
-    @*var nameArray = @Html.Raw(Json.Encode(ViewBag.fundNames))*@
+    var nameArray = [];
+    @foreach(var name in ViewBag.fundNames)
+    {
+         @:nameArray.push('@name');
+    }
+
+    var totalsArray = [];
+    @foreach(var total in ViewBag.fundTotals)
+    {
+         @:totalsArray.push(@total);
+    }
+
     var ctx = document.getElementById("myChart").getContext("2d");
-    ctx.canvas.width = 200;
-    ctx.canvas.height = 200;
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            //labels: @Html.Raw(ViewBag.fundNames),
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                //data: @Html.Raw(ViewBag.fundTotals),
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.4)',
-                    'rgba(54, 162, 235, 0.4)',
-                    'rgba(255, 206, 86, 0.4)',
-                    'rgba(75, 192, 192, 0.4)',
-                    'rgba(153, 102, 255, 0.4)',
-                    'rgba(255, 159, 64, 0.4)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+        ctx.canvas.width = 200;
+        ctx.canvas.height = 200;
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: nameArray,
+                datasets: [{
+                    data: totalsArray,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(255, 206, 86, 0.4)',
+                        'rgba(75, 192, 192, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(207, 216, 220, 0.4)',
+                        'rgba(178, 235, 242, 0.4)',
+                        'rgba(215, 204, 200, 0.4)',
+                        'rgba(245, 245, 245, 0.4)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(207, 216, 220, 0.4)',
+                        'rgba(178, 235, 242, 0.4)',
+                        'rgba(215, 204, 200, 0.4)',
+                        'rgba(245, 245, 245, 0.4)',
+                    ],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
+
 </script>

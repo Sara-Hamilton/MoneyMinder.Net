@@ -49,11 +49,11 @@ namespace MoneyMinder.Net.Controllers
             foreach (Fund fund in fundsList)
             {
                 fundNames.Add(fund.Name);
-                fundTotals.Add(System.Decimal.ToInt32(fund.Total));
+                fundTotals.Add(Convert.ToInt32(fund.Total));
                 userTotal.Add(fund.Total);
             }
-            ViewBag.fundNames = fundNames.ToList();
-            ViewBag.fundTotals = fundTotals.ToList();
+            ViewBag.fundNames = fundNames.ToArray();
+            ViewBag.fundTotals = fundTotals.ToArray();
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
             return View(fundsList);
         }
