@@ -19,6 +19,14 @@
 
 @if (Model.Any())
 {
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-2">Balance</div>
+        <div class="col-md-2">Minimum</div>
+        <div class="col-md-2">Goal</div>
+        <div class="col-md-2"></div>
+    </div>
+    <br/>
     @foreach (var listFund in Model)
     {
         <div class="panel panel-default">
@@ -68,8 +76,6 @@ else
     }
 
     var ctx = document.getElementById("myChart").getContext("2d");
-        ctx.canvas.width = 200;
-        ctx.canvas.height = 200;
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
