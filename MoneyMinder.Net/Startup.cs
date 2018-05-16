@@ -31,6 +31,7 @@ namespace MoneyMinder.Net
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddNodeServices();
             services.AddMvc();
             services.AddEntityFrameworkMySql()
                     .AddDbContext<MoneyDbContext>(options =>

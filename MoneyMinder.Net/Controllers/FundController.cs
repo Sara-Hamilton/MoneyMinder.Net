@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using MoneyMinder.Net.ViewModels;
+using System.Collections;
+using Microsoft.AspNetCore.NodeServices;
 
 namespace MoneyMinder.Net.Controllers
 {
@@ -39,14 +41,37 @@ namespace MoneyMinder.Net.Controllers
             }
             ViewBag.UserTransactionIds = userTransactionIds;
 
+            List<string> fundNames = new List<string>();
+            List<int> fundTotals = new List<int>();
+
             var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Fund fund in fundsList)
             {
+                fundNames.Add(fund.Name);
+                fundTotals.Add(Convert.ToInt32(fund.Total));
                 userTotal.Add(fund.Total);
             }
+            ViewBag.fundNames = fundNames.ToArray();
+            ViewBag.fundTotals = fundTotals.ToArray();
             ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
             return View(fundsList);
+        }
+
+        public async Task<IActionResult> Chart([FromServices] INodeServices nodeServices)
+        {
+            var options = new { width = 400, height = 200 };
+
+            var data = new[] {
+                new { label = "Abulia", count = 10 },
+                new { label = "Betelgeuse", count = 20 },
+                new { label = "Cantaloupe", count = 30 },
+                new { label = "Dijkstra", count = 40 }
+            };
+
+            ViewData["ChartImage"] = await nodeServices.InvokeAsync<string>("NodeChart.js", options, data);
+
+            return View();
         }
 
         public IActionResult Create()
