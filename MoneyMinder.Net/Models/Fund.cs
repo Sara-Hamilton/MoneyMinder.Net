@@ -15,7 +15,7 @@ namespace MoneyMinder.Net.Models
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal Total { get; set; } = 0;
-        [DisplayFormat(DataFormatString = "{0:c}}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal? Minimum { get; set; }
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
         public decimal? Goal { get; set; }
