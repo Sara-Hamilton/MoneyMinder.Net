@@ -52,7 +52,7 @@
                     <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "text-danger bold" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
                     <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "text-success bold" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
                 }
-                @if (ViewBag.currentUser.ShowMinAndGoal)
+                @if(ViewBag.currentUser.ShowMinAndGoal)
                 {
                     <div class="col-md-4"></div>
                 }
@@ -61,9 +61,9 @@
                 <div class="col-md-2">
                     @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
                     @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
-                    {
-                        <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-                    }
+                {
+                    <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                }
                 </div>
             </div>
         </div>
