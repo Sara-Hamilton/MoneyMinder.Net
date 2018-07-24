@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MoneyMinder.Net.Tests.Models
 {
-    public class TestDbContext2 : MoneyDbContext2
+    public class TestDbContext : MoneyDbContext
     {
         public override DbSet<Category> Categories { get; set; }
         public override DbSet<Fund> Funds { get; set; }

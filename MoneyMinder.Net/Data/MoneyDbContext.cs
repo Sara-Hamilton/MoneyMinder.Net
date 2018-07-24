@@ -8,9 +8,9 @@ using MoneyMinder.Net.Models;
 
 namespace MoneyMinder.Net.Data
 {
-    public class MoneyDbContext2 : IdentityDbContext<ApplicationUser>
+    public class MoneyDbContext : IdentityDbContext<ApplicationUser>
     {
-        public MoneyDbContext2()
+        public MoneyDbContext()
         {
 
         }
@@ -25,7 +25,7 @@ namespace MoneyMinder.Net.Data
             options.UseMySql(@"Server=localhost;Port=8889;database=money_minder_net;uid=root;pwd=root;");
         }
 
-        public MoneyDbContext2(DbContextOptions<MoneyDbContext2> options) : base(options)
+        public MoneyDbContext(DbContextOptions<MoneyDbContext> options) : base(options)
         {
 
         }

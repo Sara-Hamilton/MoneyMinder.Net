@@ -28,6 +28,15 @@ textarea {
     width: 100%;
 }
 
+.carousel-inner > .item > img {
+    margin: 0 auto;
+    height: 50vh;
+}
+
+.img-responsive {
+    margin: auto;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
@@ -54,4 +63,8 @@ label {
 
 .bold {
     font-weight: bold;
+}
+.right-align {
+    text-align: right;
+    padding-right: 20px;
 }
