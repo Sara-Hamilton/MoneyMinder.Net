@@ -84,26 +84,30 @@ namespace MoneyMinder.Net.Controllers
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
 
-            Transaction withdrawal = new Transaction();
-            withdrawal.Type = "Withdrawal";
-            withdrawal.Date = DateTime.Parse(Request.Form["Date"]);
-            withdrawal.Amount = -(Decimal.Parse(Request.Form["Amount"]));
-            withdrawal.Description = Request.Form["Description"];
-            withdrawal.CategoryId = int.Parse(Request.Form["CategoryId"]);
-            withdrawal.FundId = int.Parse(Request.Form["FromFund"]);
-            withdrawal.User = currentUser;
+            Transaction withdrawal = new Transaction
+            {
+                Type = "Withdrawal",
+                Date = DateTime.Parse(Request.Form["Date"]),
+                Amount = -(Decimal.Parse(Request.Form["Amount"])),
+                Description = Request.Form["Description"],
+                CategoryId = int.Parse(Request.Form["CategoryId"]),
+                FundId = int.Parse(Request.Form["FromFund"]),
+                User = currentUser
+            };
 
             var withdrawalFund = _db.Funds.FirstOrDefault(x => x.FundId == withdrawal.FundId);
             withdrawalFund.AdjustTotal(withdrawal);
 
-            Transaction deposit = new Transaction();
-            deposit.Type = "Deposit";
-            deposit.Date = DateTime.Parse(Request.Form["Date"]);
-            deposit.Amount = Decimal.Parse(Request.Form["Amount"]);
-            deposit.Description = Request.Form["Description"];
-            deposit.CategoryId = int.Parse(Request.Form["CategoryId"]);
-            deposit.FundId = int.Parse(Request.Form["ToFund"]);
-            deposit.User = currentUser;
+            Transaction deposit = new Transaction
+            {
+                Type = "Deposit",
+                Date = DateTime.Parse(Request.Form["Date"]),
+                Amount = Decimal.Parse(Request.Form["Amount"]),
+                Description = Request.Form["Description"],
+                CategoryId = int.Parse(Request.Form["CategoryId"]),
+                FundId = int.Parse(Request.Form["ToFund"]),
+                User = currentUser
+            };
 
             var depositFund = _db.Funds.FirstOrDefault(x => x.FundId == deposit.FundId);
             depositFund.AdjustTotal(deposit);
@@ -135,28 +139,46 @@ namespace MoneyMinder.Net.Controllers
             var currentUser = await _userManager.FindByIdAsync(userId);
             var FromDate = DateTime.Parse(Request.Form["FromDate"]);
             var ToDate = DateTime.Parse(Request.Form["ToDate"]);
-            //if(Request.Form["FundId"] == "")
-            //{
-            //    var FundId = 0;
-            //}
-            //else
-            //{
-            //var FundId = int.Parse(Request.Form["FundId"]);
-            //}
-            //if (Request.Form["CategoryId"] == "")
-            //{
-            //    var CategoryId = 0;
-            //}
-            //else
-            //{
-            //var CategoryId = int.Parse(Request.Form["CategoryId"]);
-            //}
-                
+            var FormFundId = 0;
+            var FormCategoryId = 0;
+          
+            if (Request.Form["FundId"] != "")
+            {
+                FormFundId = int.Parse(Request.Form["FundId"]);
+                ViewBag.FundName = _db.Funds.FirstOrDefault(funds => funds.FundId == FormFundId).Name;
+            }
+            if (Request.Form["CategoryId"] != "")
+            {
+                FormCategoryId = int.Parse(Request.Form["CategoryId"]);
+                ViewBag.CategoryName = _db.Categories.FirstOrDefault(categories => categories.CategoryId == FormCategoryId).Name;
+            }
 
-            //List<Transaction> filteredTransactions = new List<Transaction> { };
             var filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).OrderByDescending(x => x.TransactionId);
-            //ViewBag.filteredTransactions = new SelectList(filteredTransactions, "filteredTransactions", "Name");
-            //var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).OrderByDescending(x => x.TransactionId);
+
+            if(FormFundId != 0 && FormCategoryId == 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).OrderByDescending(x => x.TransactionId);
+            }
+            else if (FormFundId == 0 && FormCategoryId != 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
+            }
+            else if (FormFundId != 0 && FormCategoryId != 0)
+            {
+                filteredTransactions = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).Where(transaction => transaction.Date >= FromDate && transaction.Date <= ToDate).Where(transaction => transaction.FundId == FormFundId).Where(transaction => transaction.CategoryId == FormCategoryId).OrderByDescending(x => x.TransactionId);
+            }
+
+            List<decimal> userTotal = new List<decimal> { };
+            foreach (Transaction transaction in filteredTransactions)
+            {
+                userTotal.Add(transaction.Amount);
+            }
+            ViewBag.UserTotal = userTotal.Sum().ToString("0.00");
+
+            ViewBag.FromDate = FromDate;
+            ViewBag.ToDate = ToDate;
+            ViewBag.FormFundId = FormFundId;
+            ViewBag.FormCategoryId = FormCategoryId;
 
             return View("FilteredView", filteredTransactions);
         }

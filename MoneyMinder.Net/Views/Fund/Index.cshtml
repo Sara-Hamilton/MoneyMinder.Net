@@ -9,34 +9,129 @@
     <div class="col-md-6">
         <h2>@User.Identity.Name's Funds</h2>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
         <h3>Total : $@ViewBag.UserTotal</h3>
     </div>
 </div>
 
 <p>@Html.ActionLink("Create New Fund", "Create", "Fund")</p>
+@if (!ViewBag.currentUser.ShowMinAndGoal)
+{
+    <p>@Html.ActionLink("Hide Min and Goal", "Hide", "Account")</p>
+}
+@if (ViewBag.currentUser.ShowMinAndGoal)
+{
+    <p>@Html.ActionLink("Show Min and Goal", "Show", "Account")</p>
+}
 
 @if (Model.Any())
 {
-        @foreach (var listFund in Model)
+    <div class="row">
+        <div class="col-md-4"></div>
+        @if (!ViewBag.currentUser.ShowMinAndGoal)
         {
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
-                    <div class="col-md-4">@Html.DisplayFor(modelFund => listFund.Total)</div>
-                    <div class="col-md-4">
-                        @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
-                        @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
-                        {
-                             <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
-                        }
-                    </div>
-                </div>
-             </div>
+            <div class="col-md-2">Minimum</div>
+            <div class="col-md-2">Goal</div>
         }
-
-    }
-    else
+        @if (ViewBag.currentUser.ShowMinAndGoal)
+        {
+            <div class="col-md-4"></div>
+        }
+        <div class="col-md-2">Balance</div>
+        <div class="col-md-2"></div>
+    </div>
+    <br />
+    @foreach (var listFund in Model)
     {
-    <p>No funds have been added yet!</p>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-4">@Html.ActionLink(listFund.Name, "Details", new { id = listFund.FundId })</div>
+                @if (!ViewBag.currentUser.ShowMinAndGoal)
+                {
+                    <div class="col-md-2 @(listFund.Total <= listFund.Minimum ? "text-danger bold" : "")">@Html.DisplayFor(modelFund => listFund.Minimum)</div>
+                    <div class="col-md-2 @(listFund.Total >= listFund.Goal ? "text-success bold" : "")">@Html.DisplayFor(modelFund => listFund.Goal)</div>
+                }
+                @if (ViewBag.currentUser.ShowMinAndGoal)
+                {
+                    <div class="col-md-4"></div>
+                }
+
+                <div class="col-md-2"><b>@Html.DisplayFor(modelFund => listFund.Total)</b></div>
+                <div class="col-md-2">
+                    @Html.ActionLink("Edit", "Edit", new { id = listFund.FundId })
+                    @if (!(ViewBag.UserTransactionIds.Contains(listFund.FundId)))
+                    {
+                        <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listFund.FundId })
+                    }
+                </div>
+            </div>
+        </div>
     }
+
+}
+else
+{
+    <p>No funds have been added yet!</p>
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<center>
+    <div style="width:400px;">
+        <canvas id="myChart"></canvas>
+    </div>
+</center>
+
+<script type="text/javascript">
+
+    var nameArray = [];
+    @foreach(var name in ViewBag.fundNames)
+    {
+         @:nameArray.push('@name');
+    }
+
+    var totalsArray = [];
+    @foreach(var total in ViewBag.fundTotals)
+    {
+         @:totalsArray.push(@total);
+    }
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: nameArray,
+                datasets: [{
+                    data: totalsArray,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.4)',
+                        'rgba(54, 162, 235, 0.4)',
+                        'rgba(255, 206, 86, 0.4)',
+                        'rgba(75, 192, 192, 0.4)',
+                        'rgba(153, 102, 255, 0.4)',
+                        'rgba(255, 159, 64, 0.4)',
+                        'rgba(207, 216, 220, 0.4)',
+                        'rgba(178, 235, 242, 0.4)',
+                        'rgba(215, 204, 200, 0.4)',
+                        'rgba(245, 245, 245, 0.4)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(207, 216, 220, 1)',
+                        'rgba(178, 235, 242, 1)',
+                        'rgba(215, 204, 200, 1)',
+                        'rgba(245, 245, 245, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+</script>

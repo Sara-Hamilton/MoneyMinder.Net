@@ -13,11 +13,15 @@ namespace MoneyMinder.Net.Tests
         public void FundEquals_FundsWithSameIdAreEqual_True()
         {
             //Arrange 
-            var fund1 = new Fund();
-            fund1.FundId = 1;
+            var fund1 = new Fund
+            {
+                FundId = 1
+            };
 
-            var fund2 = new Fund();
-            fund2.FundId = 1;
+            var fund2 = new Fund
+            {
+                FundId = 1
+            };
 
             //Act
 

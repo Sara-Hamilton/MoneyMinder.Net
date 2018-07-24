@@ -11,11 +11,6 @@ namespace MoneyMinder.Net.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Display(Name = "Total")]
-        [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal? UserTotal { get; set; } = 0;
-        //public bool isAuthorized { get; set; }
-        //public bool isActive { get; set; }
+        public bool ShowMinAndGoal { get; set; }
     }
 }

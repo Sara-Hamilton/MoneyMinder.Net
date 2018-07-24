@@ -14,16 +14,16 @@
         <div class="form-group">
 
             <label for="FromDate" class="col-md-2 control-label">From Date</label>
-            <input type="date" name="FromDate" class="form-control" />
+            <input type="date" name="FromDate" class="form-control" required/>
 
             <label for="ToDate" class="col-md-2 control-label">To Date</label>
-            <input type="date" name="ToDate" class="form-control" />
+            <input type="date" name="ToDate" class="form-control" required/>
 
-            @*@<label asp-for="FundId" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            <label asp-for="FundId" class="col-md-2 control-label">Fund</label>
+            @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
 
-            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
-            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })*@
+            <label asp-for="CategoryId" class="col-md-2 control-label">Category</label>
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
 
         </div>
         <input type="submit" value="Filter" class="btn btn-default" />

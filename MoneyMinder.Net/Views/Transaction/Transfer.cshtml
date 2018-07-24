@@ -14,7 +14,7 @@
         <div class="form-group">
 
             <label asp-for="Date" class="col-md-2 control-label"></label>
-            <input asp-for="Date" class="form-control" />
+            <input asp-for="Date" class="form-control" required/>
             <span asp-validation-for="Date"></span>
 
             <label asp-for="Amount" class="col-md-2 control-label"></label>
@@ -25,10 +25,10 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description"></span>
 
-            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+            <label asp-for="CategoryId" class="col-md-2 control-label">Category</label>
             @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
-            <label asp-for="FromFund" class="col-md-2 control-label"></label>
+            <label asp-for="FromFund" class="col-md-2 control-label">From Fund</label>
             <div class="form-group">
                 <select class="form-control dropdownlist" name="FromFund" id="FromFundId">
                     @foreach (SelectListItem fund in ViewBag.FundId)
@@ -38,7 +38,7 @@
                 </select>
             </div>
 
-            <label asp-for="ToFund" class="col-md-2 control-label"></label>
+            <label asp-for="ToFund" class="col-md-2 control-label">To Fund</label>
             <div class="form-group">
                 <select class="form-control dropdownlist" name="ToFund" id="ToFundId">
                     @foreach (SelectListItem fund in ViewBag.FundId)

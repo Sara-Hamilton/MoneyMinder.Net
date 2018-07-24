@@ -13,11 +13,11 @@ namespace MoneyMinder.Net.Models
         [Key]
         public int FundId { get; set; }
         public string Name { get; set; }
-        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal Total { get; set; } = 0;
-        [DisplayFormat(DataFormatString = "{0:c}}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal? Minimum { get; set; }
-        [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
         public decimal? Goal { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }

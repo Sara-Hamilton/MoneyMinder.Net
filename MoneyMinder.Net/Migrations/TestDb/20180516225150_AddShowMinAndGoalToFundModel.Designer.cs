@@ -8,9 +8,10 @@ using MoneyMinder.Net.Tests.Models;
 namespace MoneyMinder.Net.Migrations.TestDb
 {
     [DbContext(typeof(TestDbContext))]
-    partial class TestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180516225150_AddShowMinAndGoalToFundModel")]
+    partial class AddShowMinAndGoalToFundModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -155,12 +156,12 @@ namespace MoneyMinder.Net.Migrations.TestDb
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<bool>("ShowMinAndGoal");
-
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(127);
+
+                    b.Property<decimal?>("UserTotal");
 
                     b.HasKey("Id");
 
@@ -207,6 +208,8 @@ namespace MoneyMinder.Net.Migrations.TestDb
                     b.Property<decimal?>("Minimum");
 
                     b.Property<string>("Name");
+
+                    b.Property<bool>("ShowMinAndGoal");
 
                     b.Property<decimal>("Total");
 

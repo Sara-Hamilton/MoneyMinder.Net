@@ -5,15 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<div class="row">
+<div class="row">
     <div class="col-md-6">
-        <h2>@User.Identity.Name's transactions</h2>
+        <h2>@User.Identity.Name's Transactions</h2>
+        <h4>from @ViewBag.FromDate.ToShortDateString() to @ViewBag.ToDate.ToShortDateString()</h4>
+        @if (@ViewBag.FormFundId != 0)
+        {
+            <p>Fund: @ViewBag.FundName</p>
+        }
+        @if (@ViewBag.FormCategoryId != 0)
+        {
+            <p>Category: @ViewBag.CategoryName</p>
+        }
     </div>
     <div class="col-md-3"></div>
     <div class="col-md-3">
         <h3>@ViewBag.FundName Total : $@ViewBag.UserTotal</h3>
     </div>
-</div>*@
+</div>
 
 <table class="table">
     <tr>

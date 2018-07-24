@@ -31,6 +31,7 @@ namespace MoneyMinder.Net
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddNodeServices();
             services.AddMvc();
             services.AddEntityFrameworkMySql()
                     .AddDbContext<MoneyDbContext>(options =>
@@ -73,7 +74,7 @@ namespace MoneyMinder.Net
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Account}/{action=Index}/{id?}");
+                    template: "{controller=Fund}/{action=Index}/{id?}");
             });
 
             app.Run(async (context) =>

@@ -63,7 +63,12 @@ label {
     font-weight: 100;
 }
 
+<<<<<<< HEAD
 .right-align {
     text-align: right;
     padding-right: 20px;
+=======
+.bold {
+    font-weight: bold;
+>>>>>>> 0993974ed85963df3d26a7c23d81e2c63421be2c
 }
