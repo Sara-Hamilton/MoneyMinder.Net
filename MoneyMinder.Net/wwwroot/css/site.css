@@ -17,7 +17,6 @@ textarea {
     max-width: 280px;
 }
 
-
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -27,16 +26,6 @@ textarea {
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
-}
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
-    /* width: 100%; */
-    height: 50vh;
-} 
-
-.img-responsive {
-    margin: auto;
 }
 
 /* Hide/rearrange for smaller screens */
@@ -63,12 +52,6 @@ label {
     font-weight: 100;
 }
 
-<<<<<<< HEAD
-.right-align {
-    text-align: right;
-    padding-right: 20px;
-=======
 .bold {
     font-weight: bold;
->>>>>>> 0993974ed85963df3d26a7c23d81e2c63421be2c
 }
