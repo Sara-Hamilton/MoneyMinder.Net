@@ -100,6 +100,6 @@ namespace MoneyMinder.Net.Controllers
             _db.Entry(currentUser).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index", "Fund");
-        }
+        } 
     }
 }

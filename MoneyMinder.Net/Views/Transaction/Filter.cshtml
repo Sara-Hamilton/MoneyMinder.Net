@@ -9,7 +9,7 @@
 <hr />
 
 <form asp-action="Filter">
-    <div class="form-horizontal" action="/Transaction/FilteredView" method="post">
+    <div class="form-horizontal">
 
         <div class="form-group">
 
@@ -19,6 +19,7 @@
             <label for="ToDate" class="col-md-2 control-label">To Date</label>
             <input type="date" name="ToDate" class="form-control" required/>
 
+<<<<<<< HEAD
             <label asp-for="FundId" class="col-md-2 control-label">Fund</label>
             @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
 
@@ -26,6 +27,22 @@
             @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
 
         </div>
+=======
+            <label for="IncludeFunds" class="col-md-2 control-label">Funds</label>
+            @foreach (SelectListItem fund in ViewBag.FundId)
+            { 
+                <input type="checkbox" name=@fund.Text value=@fund.Value>@fund.Text
+            }
+            <p></p>
+          
+            <label for="IncludeCategories" class="col-md-2 control-label">Categories</label>
+            @foreach (SelectListItem category in ViewBag.CategoryId)
+            {
+                <input type="checkbox" name=@category.Text value=@category.Value>@category.Text
+            }
+
+           </div>
+>>>>>>> parent of 7a9dba5... add ability to filter transactions by date range
         <input type="submit" value="Filter" class="btn btn-default" />
     </div>
 </form>
