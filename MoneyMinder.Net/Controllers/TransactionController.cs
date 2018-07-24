@@ -137,7 +137,6 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-<<<<<<< HEAD
             var FromDate = DateTime.Parse(Request.Form["FromDate"]);
             var ToDate = DateTime.Parse(Request.Form["ToDate"]);
             var FormFundId = 0;
@@ -182,10 +181,9 @@ namespace MoneyMinder.Net.Controllers
             ViewBag.FormCategoryId = FormCategoryId;
 
             return View("FilteredView", filteredTransactions);
-=======
 
-            return RedirectToAction("Index");
->>>>>>> parent of 7a9dba5... add ability to filter transactions by date range
+
+            //return RedirectToAction("Index");
         }
 
         //public IActionResult Details(int id)
