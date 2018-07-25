@@ -76,3 +76,19 @@ ul.categories {
 li.categories {
     padding: 15px 0;
 }
+
+.gray {
+    color: gray;
+}
+
+.text-box {
+    color: #130303;
+    font-weight: 400;
+    background-color: white;
+    opacity: .6;
+    width: 40rem;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px;
+    padding: 20px;
+}
