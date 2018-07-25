@@ -45,6 +45,97 @@ namespace MoneyMinder.Net.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    Category clothing = new Category
+                    {
+                        User = user,
+                        Name = "Clothing"
+                    };
+                    Category donations = new Category
+                    {
+                        User = user,
+                        Name = "Donations"
+                    };
+                    Category eatingOut = new Category
+                    {
+                        User = user,
+                        Name = "Eating Out"
+                    };
+                    Category entertainment = new Category
+                    {
+                        User = user,
+                        Name = "Entertainment"
+                    };
+                    Category gifts = new Category
+                    {
+                        User = user,
+                        Name = "Gifts"
+                    };
+                    Category groceries = new Category
+                    {
+                        User = user,
+                        Name = "Groceries"
+                    };
+                    Category health = new Category
+                    {
+                        User = user,
+                        Name = "Health"
+                    };
+                    Category home = new Category
+                    {
+                        User = user,
+                        Name = "Home"
+                    };
+                    Category kids = new Category
+                    {
+                        User = user,
+                        Name = "Kids"
+                    };
+                    Category other = new Category
+                    {
+                        User = user,
+                        Name = "Other"
+                    };
+                    Category personal = new Category
+                    {
+                        User = user,
+                        Name = "Personal"
+                    };
+                    Category pets = new Category
+                    {
+                        User = user,
+                        Name = "Pets"
+                    };
+                    Category transportation = new Category
+                    {
+                        User = user,
+                        Name = "Transportation"
+                    };
+                    Category utilities = new Category
+                    {
+                        User = user,
+                        Name = "Utilities"
+                    };
+                    Category vacation = new Category
+                    {
+                        User = user,
+                        Name = "Vacation"
+                    };
+                    _db.Categories.Add(clothing);
+                    _db.Categories.Add(donations);
+                    _db.Categories.Add(eatingOut);
+                    _db.Categories.Add(entertainment);
+                    _db.Categories.Add(gifts);
+                    _db.Categories.Add(groceries);
+                    _db.Categories.Add(health);
+                    _db.Categories.Add(home);
+                    _db.Categories.Add(kids);
+                    _db.Categories.Add(other);
+                    _db.Categories.Add(personal);
+                    _db.Categories.Add(pets);
+                    _db.Categories.Add(transportation);
+                    _db.Categories.Add(utilities);
+                    _db.Categories.Add(vacation);
+                    _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
