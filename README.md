@@ -42,13 +42,13 @@ A user signs up to create a new account or logs in to an existing account.  Subm
 Once all user info is verified, a user session is created. Navbar options expand allowing a user to view his/her funds, categories, and transactions.   
 
 ### Funds
-A new user has no funds.  A user can create funds by selecting the Add Fund link.  The user can name each fund and has the option of setting a Minimum (a minimum amount to try to maintain in the fund) and/or a Goal (a desired amount to try to achieve).  A user can edit funds.  A fund name can be changed at any time.  A user may delete any fund that has not been transacted against.  When a user clicks on a fund name, the transaction history for that fund is displayed in a table.
+A new user has a General fund and a Savings fund.  A user can create funds by selecting the Add Fund link.  The user can name each fund and has the option of setting a Minimum (a minimum amount to try to maintain in the fund) and/or a Goal (a desired amount to try to achieve).  A user can edit funds.  A fund name can be changed at any time.  A user may delete any fund that has not been transacted against.  When a user clicks on a fund name, the transaction history for that fund is displayed in a table.
 
 ### Categories
-A new user has no categories. New categories can be created.  A user may delete any category that has not been transacted against.
+A new user has 15 default categories. New categories can be created.  Categories can be renamed at any time.  A user may delete any category that has not been transacted against.
 
 ### Transactions
-A user must create at least one fund and at least one category before they can make a transaction.  All transactions must have a date, a fund, and a category. Including a description of the transaction is optional.  
+A user must have at least one fund and at least one category before they can make a transaction.  All transactions must have a date, a fund, and a category. Including a description of the transaction is optional.  
 
 ### Transfer
 A user may transfer any amount from any fund to another fund.  This is essentially a withdrawal from one fund and a transfer into another fund.  Assigning a date and category to the transaction is required.  Including a description of the transfer is optional.
