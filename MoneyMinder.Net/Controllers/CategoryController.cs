@@ -39,7 +39,7 @@ namespace MoneyMinder.Net.Controllers
             }
             ViewBag.UserTransactionIds = userTransactionIds;
 
-            return View(_db.Categories.Where(x => x.User.Id == currentUser.Id));
+            return View(_db.Categories.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name));
         }
 
         public IActionResult Create()

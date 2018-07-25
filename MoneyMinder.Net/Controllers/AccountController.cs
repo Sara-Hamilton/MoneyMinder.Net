@@ -120,6 +120,16 @@ namespace MoneyMinder.Net.Controllers
                         User = user,
                         Name = "Vacation"
                     };
+                    Fund general = new Fund
+                    {
+                        User = user,
+                        Name = "General"
+                    };
+                    Fund savings = new Fund
+                    {
+                        User = user,
+                        Name = "Savings"
+                    };
                     _db.Categories.Add(clothing);
                     _db.Categories.Add(donations);
                     _db.Categories.Add(eatingOut);
@@ -135,6 +145,8 @@ namespace MoneyMinder.Net.Controllers
                     _db.Categories.Add(transportation);
                     _db.Categories.Add(utilities);
                     _db.Categories.Add(vacation);
+                    _db.Funds.Add(general);
+                    _db.Funds.Add(savings);
                     _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
