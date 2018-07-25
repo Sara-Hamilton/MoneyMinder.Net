@@ -90,6 +90,11 @@ namespace MoneyMinder.Net.Controllers
                         User = user,
                         Name = "Kids"
                     };
+                    Category income = new Category
+                    {
+                        User = user,
+                        Name = "Income"
+                    };
                     Category other = new Category
                     {
                         User = user,
@@ -138,6 +143,7 @@ namespace MoneyMinder.Net.Controllers
                     _db.Categories.Add(groceries);
                     _db.Categories.Add(health);
                     _db.Categories.Add(home);
+                    _db.Categories.Add(income);
                     _db.Categories.Add(kids);
                     _db.Categories.Add(other);
                     _db.Categories.Add(personal);
