@@ -83,6 +83,7 @@ Peter has three different checking accounts in three different banks.  He also h
 ### John and Linda
 John and Linda share a checking account.  They want to make sure that they have enough money to cover necessary expenses without overspending.  They create an fund called Home which they transfer $2500 to each month to cover all costs associated with their housing: mortgage, utilities, maintenance, etc.  They transfer $300 a month to an fund called Vacation.  When the Goal amount of $4000 is reached, they plan to go on a trip to Hawaii.  They each have their own fun money fund.  This is money that each of them can spend on whatever they want without having to check with each other.  $250 is transferred into each fun money fund each month.  All other money goes in a general fund to be spent on food, clothing, and life's other daily expenses.  
 
+![JohnAndLindasFunds](MoneyMinder.Net/wwwroot/images/sampleFunds.png)
 ### Kevin
 Kevin has paid off his mortgage and owns his own home.  He wants to make sure that he has enough money ready to pay his property tax and house insurance bills when they come around once a year.  He creates a fund called Escrow that he transfers $500 to each month.  This will prevent him from thinking that he has more money to spend than he actually does.
 
