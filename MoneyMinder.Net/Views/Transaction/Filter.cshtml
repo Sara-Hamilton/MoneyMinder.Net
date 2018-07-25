@@ -14,28 +14,28 @@
         <div class="form-group">
 
             <label for="FromDate" class="col-md-2 control-label">From Date</label>
-            <input type="date" name="FromDate" class="form-control" required/>
+            <input type="date" name="FromDate" class="form-control" required />
 
             <label for="ToDate" class="col-md-2 control-label">To Date</label>
-            <input type="date" name="ToDate" class="form-control" required/>
+            <input type="date" name="ToDate" class="form-control" required />
 
-            <label asp-for="FundId" class="col-md-2 control-label">Fund</label>
+            <!-- <label asp-for="FundId" class="col-md-2 control-label">Fund</label>
             @Html.DropDownListFor(model => model.FundId, ViewBag.FundId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
 
             <label asp-for="CategoryId" class="col-md-2 control-label">Category</label>
-            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.CategoryId as IEnumerable<SelectListItem>, string.Empty, new { @class = "form-control" }) -->
 
-           <label for="IncludeFunds" class="col-md-2 control-label">Funds</label>
+            <label for="IncludeFunds" class="col-md-2 control-label">Funds (optional)</label>
             @foreach (SelectListItem fund in ViewBag.FundId)
-            { 
+            {
                 <input type="checkbox" name=@fund.Text value=@fund.Value>@fund.Text
             }
             <p></p>
-          
-            <label for="IncludeCategories" class="col-md-2 control-label">Categories</label>
+
+            <label for="IncludeCategories" class="col-md-2 control-label">Categories (optional)</label>
             @foreach (SelectListItem category in ViewBag.CategoryId)
             {
-                <input type="checkbox" name=@category.Text value=@category.Value>@category.Text
+            <input type="checkbox" name=@category.Text value=@category.Value>@category.Text
             }
 
         </div>
