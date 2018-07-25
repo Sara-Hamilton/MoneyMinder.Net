@@ -68,3 +68,11 @@ label {
     text-align: right;
     padding-right: 20px;
 }
+
+ul.categories {
+    list-style-type: none;
+}
+
+li.categories {
+    padding: 15px 0;
+}

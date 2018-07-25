@@ -12,19 +12,19 @@
 {
     @foreach (var listCategory in Model)
     {
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="col-md-4">@Html.DisplayFor(modelCategory => listCategory.Name)</div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+        <ul class="categories">
+            <li class="categories">
+                <div class="col-md-2">@Html.DisplayFor(modelCategory => listCategory.Name)</div>
+                <div class="col-md-2">
                     @Html.ActionLink("Edit", "Edit", new { id = listCategory.CategoryId })
                     @if (!(ViewBag.UserTransactionIds.Contains(listCategory.CategoryId)))
                     {
                         <span> | </span> @Html.ActionLink("Delete", "Delete", new { id = listCategory.CategoryId })
                     }
                 </div>
-            </div>
-        </div>
+               
+            </li>
+        </ul>
     }
 }
 else
