@@ -25,6 +25,13 @@ namespace MoneyMinder.Net.Models
             CategoryId = id;
         }
 
+        public Category(ApplicationUser user, string name, int id = 0)
+        {
+            User = user;
+            Name = name;
+            CategoryId = id;
+        }
+
         public override bool Equals(System.Object otherCategory)
         {
             if (!(otherCategory is Category))

@@ -31,6 +31,13 @@ namespace MoneyMinder.Net.Models
             FundId = id;
         }
 
+        public Fund(ApplicationUser user, string name, int id = 0)
+        {
+            User = user;
+            Name = name;
+            FundId = id;
+        }
+
         public override bool Equals(System.Object otherFund)
         {
             if (!(otherFund is Fund))

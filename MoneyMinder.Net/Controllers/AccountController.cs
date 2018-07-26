@@ -45,96 +45,25 @@ namespace MoneyMinder.Net.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Category clothing = new Category
-                    {
-                        User = user,
-                        Name = "Clothing"
-                    };
-                    Category donations = new Category
-                    {
-                        User = user,
-                        Name = "Donations"
-                    };
-                    Category eatingOut = new Category
-                    {
-                        User = user,
-                        Name = "Eating Out"
-                    };
-                    Category entertainment = new Category
-                    {
-                        User = user,
-                        Name = "Entertainment"
-                    };
-                    Category gifts = new Category
-                    {
-                        User = user,
-                        Name = "Gifts"
-                    };
-                    Category groceries = new Category
-                    {
-                        User = user,
-                        Name = "Groceries"
-                    };
-                    Category health = new Category
-                    {
-                        User = user,
-                        Name = "Health"
-                    };
-                    Category home = new Category
-                    {
-                        User = user,
-                        Name = "Home"
-                    };
-                    Category kids = new Category
-                    {
-                        User = user,
-                        Name = "Kids"
-                    };
-                    Category income = new Category
-                    {
-                        User = user,
-                        Name = "Income"
-                    };
-                    Category other = new Category
-                    {
-                        User = user,
-                        Name = "Other"
-                    };
-                    Category personal = new Category
-                    {
-                        User = user,
-                        Name = "Personal"
-                    };
-                    Category pets = new Category
-                    {
-                        User = user,
-                        Name = "Pets"
-                    };
-                    Category transportation = new Category
-                    {
-                        User = user,
-                        Name = "Transportation"
-                    };
-                    Category utilities = new Category
-                    {
-                        User = user,
-                        Name = "Utilities"
-                    };
-                    Category vacation = new Category
-                    {
-                        User = user,
-                        Name = "Vacation"
-                    };
-                    Fund general = new Fund
-                    {
-                        User = user,
-                        Name = "General"
-                    };
-                    Fund savings = new Fund
-                    {
-                        User = user,
-                        Name = "Savings"
-                    };
+                    Category clothing = new Category(user, "Clothing");
+                    Category donations = new Category(user, "Donations");                 
+                    Category eatingOut = new Category(user, "Eating Out");               
+                    Category entertainment = new Category(user, "Entertainment");
+                    Category gifts = new Category(user, "Gifts");
+                    Category groceries = new Category(user, "Groceries");
+                    Category health = new Category(user, "Health");
+                    Category home = new Category(user, "Home");
+                    Category kids = new Category(user, "Kids");
+                    Category income = new Category(user, "Income");
+                    Category other = new Category(user, "Other");
+                    Category personal = new Category(user, "Personal");
+                    Category pets = new Category(user, "Pets");
+                    Category transportation = new Category(user, "Transportation");
+                    Category utilities = new Category(user, "Utilities");
+                    Category vacation = new Category(user, "Vacation");
+                    Fund general = new Fund(user, "General");
+                    Fund savings = new Fund(user, "Savings");
+                 
                     _db.Categories.Add(clothing);
                     _db.Categories.Add(donations);
                     _db.Categories.Add(eatingOut);
