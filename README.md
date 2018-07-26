@@ -43,23 +43,41 @@ This is my capstone project for Epicodus.  Its purpose is to display understandi
 A user signs up to create a new account or logs in to an existing account.  Submitted info is verified for accuracy and checked against existing data in database.  Descriptive error messages appear on screen in case of errors.
 Once all user info is verified, a user session is created. Navbar options expand allowing a user to view his/her funds, categories, and transactions.   
 
+![Login Page](MoneyMinder.Net/wwwroot/images/login.png)
+
 ### Funds
 A new user has a General fund and a Savings fund.  A user can create funds by selecting the Add Fund link.  The user can name each fund and has the option of setting a Minimum (a minimum amount to try to maintain in the fund) and/or a Goal (a desired amount to try to achieve).  A user can edit funds.  A fund name can be changed at any time.  A user may delete any fund that has not been transacted against.  When a user clicks on a fund name, the transaction history for that fund is displayed in a table.
+
+![Funds Page](MoneyMinder.Net/wwwroot/images/funds.png)
 
 ### Categories
 A new user has 16 default categories. New categories can be created.  Categories can be renamed at any time.  A user may delete any category that has not been transacted against.
 
+![Categories Page](MoneyMinder.Net/wwwroot/images/categories.png)
+
 ### Transactions
 A user must have at least one fund and at least one category before they can make a transaction.  All transactions must have a date, a fund, and a category. Including a description of the transaction is optional.  
+
+![Transactions Form](MoneyMinder.Net/wwwroot/images/transaction.png)
+
+![Transactions Page](MoneyMinder.Net/wwwroot/images/transactions.png)
 
 ### Transfer
 A user may transfer any amount from any fund to another fund.  This is essentially a withdrawal from one fund and a transfer into another fund.  Assigning a date and category to the transaction is required.  Including a description of the transfer is optional.
 
-### View Transactions by Account, Category, and Date Range
+![Transfer Form](MoneyMinder.Net/wwwroot/images/transfer.png)
+
+### Filter Transactions by Account, Category, and Date Range
 A user may view all transactions within a specified date range.  Sorting by fund and/or category is optional. A table will display all transactions within the specified parameters and show the total amount that was transacted.   
+
+![Filter Form](MoneyMinder.Net/wwwroot/images/filterForm.png)
+
+![Filtered Results](MoneyMinder.Net/wwwroot/images/filter.png)
 
 ### Logout
 User session is deleted and user is logged out.  The navbar options retract to only allow access to the main page and to login.  
+
+![Logout Page](MoneyMinder.Net/wwwroot/images/logout.png)
 
 ## User Stories
 
