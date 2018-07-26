@@ -30,8 +30,8 @@ namespace MoneyMinder.Net.Controllers
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
             
-            ViewBag.Categories = (_db.Categories.Where(x => x.User.Id == currentUser.Id)).Count();
-            ViewBag.Funds = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id)).Count();
+            ViewBag.Categories = (_db.Categories.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name)).Count();
+            ViewBag.Funds = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name)).Count();
             var transactionsList = _db.Transactions.Include(transaction => transaction.Category).Include(transaction => transaction.Fund).Where(x => x.User.Id == currentUser.Id).OrderByDescending(x => x.TransactionId);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Transaction transaction in transactionsList)
@@ -46,8 +46,8 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id), "CategoryId", "Name");
-            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id), "FundId", "Name");
+            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "CategoryId", "Name");
+            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "FundId", "Name");
             return View();
         }
 
@@ -73,8 +73,8 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id), "CategoryId", "Name");
-            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id), "FundId", "Name");
+            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "CategoryId", "Name");
+            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "FundId", "Name");
             return View();
         }
 
@@ -127,8 +127,8 @@ namespace MoneyMinder.Net.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id), "CategoryId", "Name");
-            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id), "FundId", "Name");
+            ViewBag.CategoryId = new SelectList(_db.Categories.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "CategoryId", "Name");
+            ViewBag.FundId = new SelectList(_db.Funds.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name), "FundId", "Name");
             return View();
         }
 

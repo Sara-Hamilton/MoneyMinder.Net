@@ -44,7 +44,7 @@ namespace MoneyMinder.Net.Controllers
             List<string> fundNames = new List<string>();
             List<int> fundTotals = new List<int>();
 
-            var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id);
+            var fundsList = _db.Funds.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name);
             List<decimal> userTotal = new List<decimal> { };
             foreach (Fund fund in fundsList)
             {
