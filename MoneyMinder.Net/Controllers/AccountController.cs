@@ -45,7 +45,19 @@ namespace MoneyMinder.Net.Controllers
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Category clothing = new Category(user, "Clothing");
+                    string[] defaultCategories = { "Clothing", "Donations", "Eating Out", "Entertainment", "Gifts", "Groceries", "Health", "Home", "Kids", "Income", "Other", "Personal", "Pets", "Transportation", "Utilities", "Vacation" };
+                    foreach (var categoryName in defaultCategories)
+                    {
+                        Category newCategory = new Category(user, categoryName);
+                        _db.Categories.Add(newCategory);
+                    }
+                    string[] defaultFunds = { "General", "Savings" };
+                    foreach (var fundName in defaultFunds)
+                    {
+                        Fund newFund = new Fund(user, fundName);
+                        _db.Funds.Add(newFund);
+                    }
+                    /* Category clothing = new Category(user, "Clothing");
                     Category donations = new Category(user, "Donations");                 
                     Category eatingOut = new Category(user, "Eating Out");               
                     Category entertainment = new Category(user, "Entertainment");
@@ -81,7 +93,7 @@ namespace MoneyMinder.Net.Controllers
                     _db.Categories.Add(utilities);
                     _db.Categories.Add(vacation);
                     _db.Funds.Add(general);
-                    _db.Funds.Add(savings);
+                    _db.Funds.Add(savings); */
                     _db.SaveChanges();
                     return RedirectToAction("Index");
                 }
