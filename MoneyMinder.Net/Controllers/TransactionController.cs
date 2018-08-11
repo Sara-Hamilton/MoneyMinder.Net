@@ -181,57 +181,7 @@ namespace MoneyMinder.Net.Controllers
             ViewBag.FormCategoryId = FormCategoryId;
 
             return View("FilteredView", filteredTransactions);
-
-
-            //return RedirectToAction("Index");
         }
 
-        //public IActionResult Details(int id)
-        //{
-        //    var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-        //    return View(thisTransaction);
-        //}
-
-        //public IActionResult Edit(int id)
-        //{
-        //    var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-        //    return View(thisTransaction);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Edit(Transaction transaction)
-        //{
-        //    _db.Entry(transaction).State = EntityState.Modified;
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
-        //public ActionResult Delete(int id)
-        //{
-        //    var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-        //    return View(thisTransaction);
-        //}
-
-        //[HttpPost, ActionName("Delete")]
-        //public IActionResult DeleteConfirmed(int id)
-        //{
-        //    var thisTransaction = _db.Transactions.FirstOrDefault(transactions => transactions.TransactionId == id);
-        //    _db.Transactions.Remove(thisTransaction);
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
-        //public ActionResult DeleteAll(int id)
-        //{
-        //    return View(_db.Transactions.ToList());
-        //}
-
-        //[HttpPost, ActionName("DeleteAll")]
-        //public IActionResult DeleteAllConfirmed(int id)
-        //{
-        //    _db.Transactions.RemoveRange(_db.Transactions);
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
     }
 }

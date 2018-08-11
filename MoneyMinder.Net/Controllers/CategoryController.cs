@@ -109,17 +109,5 @@ namespace MoneyMinder.Net.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult DeleteAll(int id)
-        //{
-        //    return View(_db.Categories.ToList());
-        //}
-
-        //[HttpPost, ActionName("DeleteAll")]
-        //public IActionResult DeleteAllConfirmed(int id)
-        //{
-        //    _db.Categories.RemoveRange(_db.Categories);
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
     }
 }
